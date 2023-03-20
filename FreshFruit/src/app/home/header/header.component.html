@@ -1,10 +1,11 @@
-
 <div class="row">
   <nav style="background: white; width: 100%; height: 14%;position: fixed; z-index: 1">
     <div class="logo" style="margin-left: 50px">
-      <img src="../../../assets/images/logo_nong_san-removebg-preview.png" height="500" width="500" routerLink="/home"/>
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/frushshop.appspot.com/o/logo_nong_san-removebg-preview.png?alt=media&token=4fa905a5-7cff-4478-82bb-a544b8de49c8"
+        height="500" width="500" routerLink="/home"/>
     </div>
-    <div class="nav-links">
+    <div class="nav-links border-dark">
       <ul style="margin-left: 200px; size: 30px">
         <li class="animationTop delay-03" routerLink="/home">TRANG CHỦ</li>
         <li class="animationTop delay-05" style="margin-left: 25px">GIỚI THIỆU</li>
@@ -14,11 +15,40 @@
         <li class="animationTop delay-09" style="margin-left: 25px" routerLink="/product/">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                class="bi bi-cart" viewBox="0 1 16 16">
-            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            <path
+              d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
           </svg>
         </li>
         <li class="animationTop delay-10" style="margin-left: 25px">
-          <button class="btn btn-success" style="width: 100px; height: 35px" routerLink="/security">Đăng nhập</button>
+          <button *ngIf="!isLoggedIn; else elseBlock" class="btn btn-success" style="width: 100px; height: 35px"
+                  routerLink="/security">Đăng nhập
+          </button>
+          <ng-template #elseBlock>
+            <div>
+              <div class="dropdown animationTop delay-11">
+                <a class="m-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="{{user?.avatar}}" class="rounded-circle"
+                       style="width: 40px; background-image: none; height: 40px" height="24" width="24"
+                       alt="avc"/>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end bg-success" style=" cursor: pointer; width: 180px">
+                  <li class="animationTop delay-01" style="color: white">
+                    <i class="fa-solid fa-user me-3"></i><strong>{{user?.username}}</strong>
+                  </li>
+                  <li class="animationTop delay-02"><a class="dropdown"> <i class="fa-solid fa-gear me-1"></i>
+                    Sửa thông tin cá nhân</a></li>
+                  <li class="animationTop delay-03"><a class="dropdown"><i class="fa-sharp fa-solid fa-key me-1"></i>
+                    Sửa mật khẩu</a></li>
+                  <br>
+
+                  <li class="animationTop delay-04"><a class="dropdown" data-bs-toggle="modal" data-bs-target="#logout"
+                                                       (click)="logout()"
+                                                       type="button"><i
+                    class="fa-sharp fa-solid fa-right-to-bracket me-1"></i> Đăng xuất </a></li>
+                </ul>
+              </div>
+            </div>
+          </ng-template>
         </li>
       </ul>
     </div>

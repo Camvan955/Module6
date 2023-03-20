@@ -1,5 +1,4 @@
 <div>
-
   <div id="carouselExampleTouch" class="carousel slide" data-mdb-touch="false">
     <div class="carousel-indicators">
     </div>
@@ -11,7 +10,6 @@
       </div>
     </div>
   </div>
-
   <div style="margin-top: 50px">
     <div>
       <div class="text-center mb-5">
@@ -65,103 +63,35 @@
     </div>
   </div>
   <div style=" text-align: center; margin-top: 5rem">
-    <b style="font-size: 3rem">DANH MỤC SẢN PHẨM</b>
-    <section id="pack" class="packages">
-      <div class="container" style="margin-top: 0.5em; background-color: beige">
-        <div>
-          <div class="packages-content">
-            <div class="row">
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <img style="height: 300px;width: 370px"
-                       src="https://sieuthisuckhoe.vn/wp-content/uploads/2017/11/thuc-pham-dinh-duong-dep-da.jpg "
-                       alt="package-place">
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Hạt sấy khô </h4>
-                    <div class="packages-review">
-                      <p>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </p>
-                    </div>
-                    <div class="about-btn">
-                      <button class="btn btn-success">
-                        Xem thêm
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <img style="height: 300px;width: 370px"
-                       src="https://www.cdc.gov/foodsafety/images/comms/features/GettyImages-1247930626-500px.jpg?_=00453"
-                       alt="package-place">
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Rau củ sạch</h4>
-                    <div class="packages-review">
-                      <p>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </p>
-                    </div>
-                    <div class="about-btn">
-                      <button class="btn btn-success">
-                        Xem thêm
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <img style="height: 300px;width: 370px"
-                       src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/09/27/all-the-fruits-cut-whole.jpg.rend.hgtvcom.616.493.suffix/1632778035320.jpeg"
-                       alt="package-place">
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Hoa quả </h4>
-                    <div class="packages-review">
-                      <p>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </p>
-                    </div>
-                    <div class="about-btn">
-                      <button class="btn btn-success ">
-                        Xem thêm
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <b style="font-size: 3rem">SẢN PHẨM MỚI NHẤT</b>
+    <div class="offset-4 col-4 mt-5">
+      <form>
+        <div class="d-flex   zoom">
+          <input class="form-control me-2" type="search" placeholder="Nhập tên sản phẩm cần tìm"
+                 aria-label="Search">
+          <button class="btn btn-primary" type="submit" style="width: 50px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="currentColor" class="bi bi-search"
+                 viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+          </button>
         </div>
-      </div>
-    </section>
-  </div>
-  <div style=" text-align: center; margin-top: 5rem">
-    <b style="font-size: 3rem">SẢN PHẨM NỔI BẬT</b>
-    <div class="packages">
-      <div class="container" style="margin-top: 0.5em; background-color: beige">
+      </form>
+    </div>
+    <div class="packages" style="background-color:beige">
+      <div class="container" style="margin-top: 0.5em">
         <div>
           <div class="packages-content">
             <div class="row">
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
+              <div class="col-4 col-md-4 col-sm-6 filtr-container" *ngFor="let item of pageProduct">
                 <div class="single-package-item filtr-item" style="text-align: center">
                   <a routerLink="/home/detail">
-                    <img style="height: 300px;width: 370px" src="../../../assets/images/hat-dieu.png"
+                    <img style="height: 300px;width: 370px" [src]="item.image"
                          alt="package-place"/></a>
                   <div class="single-package-item-txt">
-                    <h4 class="mt-3">Hạt điều Bình Phước</h4>
+                    <h4 class="mt-3">{{item.nameProduct}}</h4>
+                    <p>Giá: <span> {{item.price | currency : 'VND'}}  </span></p>
                     <div class="btn">
                       <button class="btn btn-success">
                         Thêm vào giỏ hàng
@@ -170,145 +100,25 @@
                   </div>
                 </div>
               </div>
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <a href="">
-                    <img style="height: 300px;width: 370px"
-                         src="../../../assets/images/hong_xiem_-min-1.jpg" alt="package-place"
-                    />
-                  </a>
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Hồng xiêm</h4>
-                    <div class="about-btn">
-                      <button class="btn btn-success">
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <a href="">
-                    <img style="height: 300px;width: 370px"
-                         src="../../../assets/images/nhan-long-hung-yen-4-min.jpg"
-                         alt="package-place">
-                  </a>
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Nhãn lồng Hưng Yên</h4>
-                    <div class="about-btn">
-                      <button class="btn btn-success">
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <a href="">
-                    <img style="height: 300px;width: 370px"
-                         src="../../../assets/images/oi-nu-hoang-min.jpg"
-                         alt="package-place">
-                  </a>
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Ổi nữ hoàng</h4>
-                    </div>
-                    <div class="about-btn">
-                      <button class="btn btn-success ">
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <a href="">
-                    <img style="height: 300px;width: 370px"
-                         src="https://davin.vn/wp-content/uploads/2022/04/hoa-atiso.jpg"
-                         alt="package-place">
-                  </a>
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Hoa Atiso</h4>
-                    <div class="about-btn">
-                      <button class="btn btn-success">
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4 col-md-4 col-sm-6 filtr-container ">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <a href="">
-                    <img style="height: 300px;width: 370px"
-                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4qgavuDBe0ze1fV4rgX878AMUnYG6oavWDQ&usqp=CAU"
-                         alt="package-place">
-                  </a>
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Cần tây</h4>
-                    <div class="about-btn">
-                      <button class="btn btn-success ">
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <a href="">
-                    <img style="height: 300px;width: 370px"
-                         src="../../../assets/images/mac-ca.jpg"
-                         alt="package-place">
-                  </a>
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Hạt mắc ca</h4>
-                    <div class="about-btn">
-                      <button class="btn btn-success">
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <a href="">
-                    <img style="height: 300px;width: 370px"
-                         src="../../../assets/images/xoai-tuong3.jpg"
-                         alt="package-place">
-                  </a>
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Xoài tượng</h4>
-                    <div class="about-btn">
-                      <button class="btn btn-success ">
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4 col-md-4 col-sm-6 filtr-container">
-                <div class="single-package-item filtr-item" style="text-align: center">
-                  <a href="">
-                    <img style="height: 300px;width: 370px"
-                         src="../../../assets/images/hat-dieu.png"
-                         alt="package-place">
-                  </a>
-                  <div class="single-package-item-txt">
-                    <h4 class="mt-3">Hạt điều</h4>
-                    <div class="about-btn">
-                      <button class="btn btn-success ">
-                        Thêm vào giỏ hàng
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div>
+                <a style="cursor: pointer; color: #151414; text-decoration: none" type="button"
+                   (click)="getNewProduct(size+3)" *ngIf="!last">
+                  Xem thêm
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-caret-down" viewBox="0 0 16 16">
+                    <path
+                      d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                  </svg>
+                </a>
+                <a style="cursor: pointer; color: #151414; text-decoration: none" type="button"
+                   (click)="getNewProduct(size=3)" *ngIf="last">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-caret-up" viewBox="0 0 16 16">
+                    <path
+                      d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"/>
+                  </svg>
+                  Ẩn bớt
+                </a>
               </div>
             </div>
           </div>
