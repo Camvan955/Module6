@@ -6,5 +6,5 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IProductService {
-    Page<Product> listNew(Pageable pageable);
+    Page<ProductView> pageProduct(Pageable pageable);
 }

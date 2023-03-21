@@ -1,5 +1,6 @@
 package com.freshshop.controller;
 
+import com.freshshop.dto.ProductView;
 import com.freshshop.entity.product.Product;
 import com.freshshop.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,11 @@ public class ProductRestController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+
     @GetMapping("")
-    public ResponseEntity<Page<Product>> getListNewProduct(@PageableDefault(page = 0, size = 3)Pageable pageable){
-        Page<Product> productPage = productService.listNew(pageable);
+    public ResponseEntity<Page<ProductView>> getListNewProduct(@PageableDefault(page = 0, size = 3)Pageable pageable){
+        Page<ProductView> productPage = productService.pageProduct(pageable);
         if (productPage.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

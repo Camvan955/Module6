@@ -9,10 +9,11 @@
       <ul style="margin-left: 200px; size: 30px">
         <li class="animationTop delay-03" routerLink="/home">TRANG CHỦ</li>
         <li class="animationTop delay-05" style="margin-left: 25px">GIỚI THIỆU</li>
-        <li class="animationTop delay-06" style="margin-left: 25px">SẢN PHẨM</li>
+        <li class="animationTop delay-06" style="margin-left: 25px">DANH MỤC SẢN PHẨM</li>
         <li class="animationTop delay-07" style="margin-left: 25px">KIẾN THỨC</li>
         <li class="animationTop delay-08" style="margin-left: 25px">LIÊN HỆ</li>
-        <li class="animationTop delay-09" style="margin-left: 25px" routerLink="/product/">
+        <li class="animationTop delay-07" style="margin-left: 25px " routerLink="/product/"
+            *ngIf="role != 'ROLE_ADMIN'">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                class="bi bi-cart" viewBox="0 1 16 16">
             <path
@@ -36,7 +37,7 @@
                     <i class="fa-solid fa-user me-3"></i><strong>{{user?.username}}</strong>
                   </li>
                   <li class="animationTop delay-02"><a class="dropdown"> <i class="fa-solid fa-gear me-1"></i>
-                    Sửa thông tin cá nhân</a></li>
+                    Thông tin cá nhân</a></li>
                   <li class="animationTop delay-03"><a class="dropdown"><i class="fa-sharp fa-solid fa-key me-1"></i>
                     Sửa mật khẩu</a></li>
                   <br>

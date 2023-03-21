@@ -12,6 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface IProductRepository extends JpaRepository<Product, Integer> {
-@Query(value = "select * from `fresh_shop`.`product` order by id_product desc", nativeQuery = true)
-    Page<Product> listNew(Pageable pageable);
+    @Query(value = "select id_product as idProduct, name_product as nameProduct, price ,\n" +
+            "            image ,\n" +
+            "            flag_delete as flagDelete\n" +
+            "            from `fresh_shop`.`product`\n" +
+            "            where flag_delete = false\n" +
+            "            order by id_product desc",
+            nativeQuery = true)
+    Page<ProductView> pageProduct(Pageable pageable);
 }

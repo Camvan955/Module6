@@ -16,7 +16,7 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public Page<Product> listNew(Pageable pageable) {
-        return productRepository.listNew(pageable);
+    public Page<ProductView> pageProduct(Pageable pageable) {
+        return productRepository.pageProduct(pageable);
     }
 }

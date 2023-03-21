@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ec29e08b-3459-4c44-8f35-e072490e689e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/FreshShopApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/entity/account/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/entity/account/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/entity/account/RoleName.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/entity/product/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/entity/product/OrderDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/entity/product/Orders.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/entity/product/Origin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/java/com/freshshop/entity/product/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FreshShop/src/test/java/com/freshshop/FreshShopApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2NElzEwqS7n9IKgyq02QMISg36g" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="BeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="BE" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="demo.be.BeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ec29e08b-3459-4c44-8f35-e072490e689e" name="Changes" comment="" />
+      <created>1679237383490</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679237383490</updated>
+      <workItem from="1679237384758" duration="137000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

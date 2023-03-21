@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TokenStorageService} from "../../service/authentication/token-storage.service";
 import {SecurityService} from "../../service/authentication/security.service";
 import {Title} from "@angular/platform-browser";
+import {ShareService} from "../../service/authentication/share.service";
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
               private tokenStorageService: TokenStorageService,
+              private shareService: ShareService,
               private route: ActivatedRoute,
               private securityService: SecurityService,
               private titleService: Title) {
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
           }
           const user = this.tokenStorageService.getUser();
           this.securityService.setIsLoggedIn(user, true);
+          this.shareService.sendClickEvent();
           const username = this.tokenStorageService.getUsername();
           this.roles = this.tokenStorageService.getRole();
           this.router.navigateByUrl('home');
