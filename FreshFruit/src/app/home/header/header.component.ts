@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../../service/authentication/token-storage.service";
 import {SecurityService} from "../../service/authentication/security.service";
 import {Router} from "@angular/router";
 import {ShareService} from "../../service/authentication/share.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   user: any;
   username = ''
+  name= '';
   role: string = "";
 
   constructor(private tokenStorageService: TokenStorageService,
@@ -31,15 +33,14 @@ export class HeaderComponent implements OnInit {
     let roles = '';
     if (this.tokenStorageService.getRole()) {
       roles = this.tokenStorageService.getRole()[0];
-      console.log(roles);
     }
     return roles;
   }
 
   ngOnInit(): void {
-  this.shareService.getClickEvent().subscribe(next => {
-    this.role = this.getRole();
-  })
+    this.shareService.getClickEvent().subscribe(next => {
+      this.role = this.getRole();
+    })
   }
 
   logout() {
@@ -47,5 +48,12 @@ export class HeaderComponent implements OnInit {
     this.securityService.setIsLoggedIn(null, false);
     this.router.navigateByUrl('home');
     this.shareService.sendClickEvent();
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Đăng xuất thành công!',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 }

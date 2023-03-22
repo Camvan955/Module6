@@ -1,48 +1,17 @@
-<!--<body>-->
-<!--<div class="product-card">-->
-<!--  <div class="badge">Hot</div>-->
-<!--  <div class="product-tumb">-->
-<!--    <img src="../../../assets/images/hat-dieu.png"/></div>-->
-<!--  <div class="product-details" style="margin-left: 25%">-->
-<!--    <span class="product-catagory" >Hạt sấy khô</span>-->
-<!--    <h4><a href="">Hạt điều rang muối</a></h4>-->
-<!--    <p> Điều A cồ loại I: 250g - 500g-->
-<!--    <p>-->
-
-<!--    <p> - Thành phần: 99.9% điều size A Cồ , 0.1% muối hạt</p>-->
-
-<!--    <p>- Xuất xứ: Việt Nam.</p>-->
-
-<!--    <p> - HSD: 12 tháng</p>-->
-
-<!--    <p> - Hướng dẫn sử dụng: Ăn trực tiếp</p>-->
-
-<!--    <p> - Bảo quản: Nơi thoáng mát, đậy kín sau khi sử dụng.</p>-->
-<!--    <div class="product-bottom-details">-->
-<!--      <div class="product-price"><small>250.000 VNĐ</small>200.000VNĐ</div>-->
-<!--      <div class="product-links">-->
-<!--        <a href=""><i class="fa fa-heart"></i></a>-->
-<!--        <a href=""><i class="fa fa-shopping-cart"></i></a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--</body>-->
-
-<div style="margin-bottom: 50px;margin-top: 5rem; border-radius: 20px" class="container">
-  <div class="card" style=" background-color: #b6ecd0">
+<div style="margin-bottom: 50px;margin-top: 9rem; border-radius: 50px" class="container">
+  <div class="card" style=" background-color:#e8d8c6 ">
     <div class="container-fluid">
       <div class="wrapper row">
         <div class="preview col-md-6">
           <div class="preview-pic tab-content">
             <div class="tab-pane active" id="pic-1">
-              <img src="../../../assets/images/dieu.jpg" style="border-radius: 30px"/>
+              <img [src]="productt.image" style="border-radius: 30px"/>
             </div>
           </div>
 
         </div>
         <div class="details col-md-6 mt-5">
-          <h3 class="product-title">Hạt điều Bình Phước</h3>
+          <h3 class="product-title">{{productt.nameProduct}}</h3>
           <div class="rating">
             <div class="stars">
               <span class="fa fa-star checked"></span>
@@ -53,24 +22,26 @@
             </div>
             <span class="review-no">41 đánh giá</span>
           </div>
-          <p class="product-description">Được tuyển chọn từ vùng nguyên liệu trồng theo phương pháp truyền thống không
-            sử dụng thuốc trừ sâu và hóa chất trong sản xuất của đồng bào Khome.</p>
-          <h6  class="price">Giá: <span class="size" title="small">295.000₫</span></h6>
+          <p class="product-description">{{productt.description}}</p>
+          <h6 class="price">Giá: <span class="size" title="small">{{productt.price | number}}đ</span></h6>
           <h6 class="sizes">Trọng lượng:
             <span class="size" title="small">500g</span>
           </h6>
-          <h6 class="colors" >Số lượng:
-            <div class="col-md-3 col-lg-3 col-xl-2 d-flex size" title="small">
-              <button class="btn btn-link px-2" style="display: inline">
-                <i class="fas fa-minus"></i>
-              </button>
-              <input id="form1" min="0" style="width: 60px;display: inline" name="quantity" value="1" type="number"
-                     class="form-control form-control-sm" />
+          <h6 class="colors">Số lượng:
+              <div class="col-md-3 col-lg-3 col-xl-2 d-flex size" title="small">
+                <button class="btn btn-link px-2" style="display: inline;width: 40px; margin-right: 5px"
+                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                  <i class="fas fa-minus"></i>
+                </button>
 
-              <button class="btn btn-link px-2"  style="display: inline">
-                <i class="fas fa-plus"></i>
-              </button>
-            </div>
+                <input id="form2" min="1" name="quantity" value="1" type="number"
+                       class="form-control form-control-md" style="width: 50px"/>
+
+                <button class="btn btn-link px-2 " style="display: inline; width: 40px; margin-left: 5px"
+                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
           </h6>
           <h5 class="colors">
             <button style="width: 100%;" class="add-to-cart btn" type="button">Thêm vào giỏ hàng</button>
@@ -79,7 +50,7 @@
       </div>
     </div>
     <div class="pt-5" style="text-align: center">
-      <h6 class="mb-0"><a routerLink="/" class="text-body btn btn-warning">Quay lại trang chủ</a></h6>
+      <h6 class="mb-0"><a routerLink="/home" class="text-body btn btn-warning">Quay lại trang chủ</a></h6>
     </div>
   </div>
 

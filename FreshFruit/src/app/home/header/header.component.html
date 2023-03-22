@@ -9,7 +9,7 @@
       <ul style="margin-left: 200px; size: 30px">
         <li class="animationTop delay-03" routerLink="/home">TRANG CHỦ</li>
         <li class="animationTop delay-05" style="margin-left: 25px">GIỚI THIỆU</li>
-        <li class="animationTop delay-06" style="margin-left: 25px">DANH MỤC SẢN PHẨM</li>
+        <li class="animationTop delay-06" style="margin-left: 25px">SẢN PHẨM</li>
         <li class="animationTop delay-07" style="margin-left: 25px">KIẾN THỨC</li>
         <li class="animationTop delay-08" style="margin-left: 25px">LIÊN HỆ</li>
         <li class="animationTop delay-07" style="margin-left: 25px " routerLink="/product/"
@@ -27,13 +27,14 @@
           <ng-template #elseBlock>
             <div>
               <div class="dropdown animationTop delay-11">
-                <a class="m-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="m-3 d-flex" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="{{user?.avatar}}" class="rounded-circle"
                        style="width: 40px; background-image: none; height: 40px" height="24" width="24"
                        alt="avc"/>
+                  <strong style="color: #151414; margin-top: 7px; margin-left: 5px" >{{user?.name}}</strong>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end bg-success" style=" cursor: pointer; width: 180px">
-                  <li class="animationTop delay-01" style="color: white">
+                <ul class="dropdown-menu dropdown-menu bg-success" style="width: 180px">
+                  <li style="color: white">
                     <i class="fa-solid fa-user me-3"></i><strong>{{user?.username}}</strong>
                   </li>
                   <li class="animationTop delay-02"><a class="dropdown"> <i class="fa-solid fa-gear me-1"></i>

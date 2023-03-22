@@ -5,6 +5,7 @@ import {TokenStorageService} from "../../service/authentication/token-storage.se
 import {SecurityService} from "../../service/authentication/security.service";
 import {Title} from "@angular/platform-browser";
 import {ShareService} from "../../service/authentication/share.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,7 @@ import {ShareService} from "../../service/authentication/share.service";
 })
 export class LoginComponent implements OnInit {
 
-  errorMessage = '';
   roles: string[] = [];
-  returnUrl = '/';
   errors = {username: '', password: ''};
 
   formGroup = new FormGroup({
@@ -38,12 +37,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.errors = {username: '', password: ''};
-    this.errorMessage = '';
     if (this.formGroup.valid) {
       this.securityService.login(this.formGroup.value).subscribe(
         data => {
-          console.log(data);
           if (this.formGroup.value.rememberMe) {
             this.tokenStorageService.saveTokenLocal(data.token);
             this.tokenStorageService.saveUserLocal(data, data.email, data.id, data.username, data.name, data.roles, data.avatar);
@@ -52,22 +48,30 @@ export class LoginComponent implements OnInit {
             this.tokenStorageService.saveUserSession(data, data.email, data.id, data.username, data.name, data.roles, data.avatar);
           }
           const user = this.tokenStorageService.getUser();
+          console.log(user);
           this.securityService.setIsLoggedIn(user, true);
           this.shareService.sendClickEvent();
-          const username = this.tokenStorageService.getUsername();
+          const id = this.tokenStorageService.getIdAccount();
           this.roles = this.tokenStorageService.getRole();
           this.router.navigateByUrl('home');
           this.formGroup.reset();
-          // this.toast.success('Đăng nhập thành công.', 'Thông báo', {
-          //   timeOut: 2000, positionClass: 'toast-top-center'
-          // }
-          // );
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Đăng nhập thành công!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }, error => {
 
           if (error.status == 406) {
-            this.errorMessage = error.error.message;
-            // this.toast.error(this.errorMessage, 'Thất bại'
-            //   , {positionClass: 'toast-top-center'});
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Đăng nhập thất bại!',
+              showConfirmButton: false,
+              timer: 1500
+            })
           }
           this.securityService.isLoggedIn = false;
           if (error.error.errors) {

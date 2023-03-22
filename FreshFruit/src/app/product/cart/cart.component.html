@@ -1,4 +1,4 @@
-<div style="margin-top: 70px">
+<div style="margin-top: 90px">
   <section class="h-100 h-custom" style="background-color: beige ">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -7,126 +7,61 @@
             <div class="card-body p-0">
               <div class="row g-0">
                 <div class="col-lg-8">
-                  <div class="p-5">
+                  <div class="p-5" *ngIf="length != 0; else elseBlock">
                     <div class="d-flex justify-content-between align-items-center">
                       <h1 class="fw-bold mb-0 ">Giỏ hàng của bạn</h1>
                     </div>
                     <hr class="my-4">
+                    <div>
+                      <div class="row mb-4 d-flex justify-content-between align-items-center" *ngFor="let item of carts">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                          <img src="{{item.imageProduct}}"class="img-fluid rounded-3">
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3">
+                          <h6 class="text-black mb-0">{{item.nameProduct}}</h6>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                          <button class="btn btn-link px-2"
+                                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fas fa-minus"></i>
+                          </button>
 
-                    <div class="row mb-4 d-flex justify-content-between align-items-center">
-                      <div class="col-md-2 col-lg-2 col-xl-2">
-                        <img
-                          src="../../../assets/images/mit-to-nu.jpg"
-                          class="img-fluid rounded-3">
-                      </div>
-                      <div class="col-md-3 col-lg-3 col-xl-3">
-                        <h6 class="text-muted">Hoa quả</h6>
-                        <h6 class="text-black mb-0">Mít tố nữ</h6>
-                      </div>
-                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                        <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                          <i class="fas fa-minus"></i>
-                        </button>
+                          <input id="form" min="1" name="quantity" [value]="item.quantity" type="number"
+                                 class="form-control form-control-md" style="width: 50px"/>
 
-                        <input id="form" min="0" name="quantity" value="1" type="number"
-                               class="form-control form-control-md" style="width: 50px"/>
-
-                        <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                          <i class="fas fa-plus"></i>
-                        </button>
+                          <button class="btn btn-link px-2"
+                                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                          <h6 class="mb-0">{{item.price | number}}đ</h6>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                          <a class="text-muted"><i class="fas fa-times"></i></a>
+                        </div>
                       </div>
-                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                        <h6 class="mb-0">80.000 VNĐ</h6>
-                      </div>
-                      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                        <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                      </div>
+                      <hr class="my-4">
                     </div>
-
-                    <hr class="my-4">
-
-                    <div class="row mb-4 d-flex justify-content-between align-items-center">
-                      <div class="col-md-2 col-lg-2 col-xl-2">
-                        <img
-                          src="../../../assets/images/hat-dieu.png"
-                          class="img-fluid rounded-3" alt="Cotton T-shirt">
-                      </div>
-                      <div class="col-md-3 col-lg-3 col-xl-3">
-                        <h6 class="text-muted">Hạt sấy khô</h6>
-                        <h6 class="text-black mb-0">Hạt điều</h6>
-                      </div>
-                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                        <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                          <i class="fas fa-minus"></i>
-                        </button>
-
-                        <input id="form2" min="0" name="quantity" value="1" type="number"
-                               class="form-control form-control-md" style="width: 50px"/>
-
-                        <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                          <i class="fas fa-plus"></i>
-                        </button>
-                      </div>
-                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                        <h6 class="mb-0">200.000 VNĐ</h6>
-                      </div>
-                      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                        <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                      </div>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <div class="row mb-4 d-flex justify-content-between align-items-center">
-                      <div class="col-md-2 col-lg-2 col-xl-2">
-                        <img
-                          src="../../../assets/images/xoai-tuong3.jpg"
-                          class="img-fluid rounded-3" alt="Cotton T-shirt">
-                      </div>
-                      <div class="col-md-3 col-lg-3 col-xl-3">
-                        <h6 class="text-muted">Hoa quả</h6>
-                        <h6 class="text-black mb-0">Xoài tượng</h6>
-                      </div>
-                      <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                        <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                          <i class="fas fa-minus"></i>
-                        </button>
-
-                        <input id="form1" min="0" name="quantity" value="1" type="number"
-                               class="form-control form-control-sm" style="width: 50px"/>
-
-                        <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                          <i class="fas fa-plus"></i>
-                        </button>
-                      </div>
-                      <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                        <h6 class="mb-0">80.000 VNĐ</h6>
-                      </div>
-                      <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                        <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                      </div>
-                    </div>
-
-                    <hr class="my-4">
                   </div>
+                  <ng-template #elseBlock>
+                    <div style="margin-left: 30%; margin-top: 20%">
+                    <img src="../../../assets/images/gio hang trong.png" height="210" width="300"/>
+                    </div>
+                    <button class="btn btn-success" style="margin-left: 42%; margin-top: 3%" routerLink="/home">Quay lại</button>
+                  </ng-template>
                 </div>
                 <div class="col-lg-4 bg-grey">
                   <div class="p-5">
-                    <h3 class="fw-bold mb-5 mt-2 pt-1 text-uppercase">Tổng tiền tạm tính</h3>
+                    <h3 class="fw-bold mb-5 mt-2 pt-1 text-uppercase text-center">hóa đơn</h3>
                     <hr class="my-4">
 
                     <div class="d-flex justify-content-between mb-4">
-                      <h5>Số mặt hàng: <span style="margin-left: 10px">3</span></h5>
+                      <h5>Số mặt hàng: <span style="margin-left: 10px">{{length}}</span></h5>
 
                     </div>
 
-                    <h5>Phương thức giao hàng: </h5>
+                    <h5 style="border-radius: 10px">Phương thức giao hàng: </h5>
 
                     <div class="mb-4 pb-2">
                       <select class="form-select border-2">
@@ -141,22 +76,19 @@
                     <div class="mb-5">
                       <div class="form-outline">
                         <input type="text" id="form3Examplea2"
-                               class="form-control form-control-lg"/>
-                        <label class="form-label" for="form3Examplea2">Nhập mã giảm giá</label>
+                               class="form-control form-control" placeholder="Nhập mã giảm giá"/>
                       </div>
                     </div>
 
                     <hr class="my-4">
 
-                    <div class="d-flex justify-content-between mb-5">
-                      <h5>Tổng tiền: </h5>
-                      <h5>360.000 VNĐ</h5>
+                    <div class="d-flex justify-content-between mb-3">
+                      <h5>Tổng tiền: {{total | number}} đ</h5>
                     </div>
 
-                    <button type="button" class="btn btn-primary btn-lg"
+                    <button type="button" class="btn btn-primary btn-md" style="margin-left: 30%"
                             data-mdb-ripple-color="primary">Thanh toán
                     </button>
-
                   </div>
                 </div>
               </div>

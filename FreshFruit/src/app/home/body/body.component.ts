@@ -4,6 +4,9 @@ import {ProductService} from "../../service/product.service";
 import {ActivatedRoute} from "@angular/router";
 import {ShareService} from "../../service/authentication/share.service";
 import {TokenStorageService} from "../../service/authentication/token-storage.service";
+import {Cart} from "../../entity/cart";
+import Swal from "sweetalert2";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-body',
@@ -13,24 +16,35 @@ import {TokenStorageService} from "../../service/authentication/token-storage.se
 export class BodyComponent implements OnInit {
   pageProduct: Product[] = [];
   numberPage: number = 0;
-  product: Product = {};
+  product: Product = {idProduct: 0, price: 0, image: '', nameProduct: '', description: ''};
   totalPages = 0;
   size: number = 3;
   last: any;
   first: any;
   role: String = "";
 
+  cart: Cart = {
+    id: 0,
+    nameProduct: '',
+    price: 0,
+    imageProduct: '',
+    quantity: 0
+  };
+  cartt: Cart[] = [];
+
   constructor(private produceService: ProductService,
-              private  activatedRoute: ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
               private shareService: ShareService,
-              private tokenStorageService: TokenStorageService) {
+              private tokenStorageService: TokenStorageService,
+              private title: Title) {
+    this.title.setTitle("Trang chủ")
+
   }
 
   getRole() {
     let roles = '';
     if (this.tokenStorageService.getRole()) {
       roles = this.tokenStorageService.getRole()[0];
-      console.log(roles);
     }
     return roles;
   }
@@ -46,7 +60,6 @@ export class BodyComponent implements OnInit {
   getNewProduct(size: number) {
     this.produceService.getListNewProduct(size).subscribe(data => {
       if (data != null) {
-        console.log("aaaaa"+ data);
         this.pageProduct = data.content;
         this.numberPage = data.number;
         this.size = data.size;
@@ -56,5 +69,44 @@ export class BodyComponent implements OnInit {
         this.shareService.sendClickEvent();
       }
     });
+  }
+
+  addToCart(ids: number, images: string, names: string, prices: number) {
+    if (this.tokenStorageService.getCart() != undefined) {
+      this.cartt = this.tokenStorageService.getCart();
+      this.cart.id = ids;
+      this.cart.imageProduct = images;
+      this.cart.nameProduct = names;
+      this.cart.price = prices;
+      if (this.tokenStorageService.checkExistId(ids)) {
+        this.tokenStorageService.upQuantityProduct(ids, this.cartt)
+      } else {
+        this.cart.quantity = 1;
+        this.cartt.push(this.cart);
+      }
+      this.tokenStorageService.setCart(this.cartt);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Đã thêm sản phẩm ' + this.cart.nameProduct + ' vào giỏ hàng',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    } else {
+      this.cart.id = ids;
+      this.cart.imageProduct = images;
+      this.cart.nameProduct = names;
+      this.cart.price = prices;
+      this.cart.quantity = 1;
+      this.cartt.push(this.cart);
+      this.tokenStorageService.setCart(this.cartt);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Đã thêm sản phẩm ' + this.cart.nameProduct + ' vào giỏ hàng',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
   }
 }
