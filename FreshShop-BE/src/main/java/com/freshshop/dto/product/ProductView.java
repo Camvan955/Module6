@@ -1,4 +1,4 @@
-package com.freshshop.dto;
+package com.freshshop.dto.product;
 
 public interface ProductView {
 Integer getIdProduct();

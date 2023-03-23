@@ -5,17 +5,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Cart {
+public class CartDto {
     private Integer id;
     private String nameProduct;
+    private Double price;
     private String imageProduct;
     private int quantity;
 
     @Override
     public String toString() {
-        return "Cart{" +
+        return "CartDto{" +
                 "id=" + id +
                 ", nameProduct='" + nameProduct + '\'' +
+                ", price=" + price +
                 ", imageProduct='" + imageProduct + '\'' +
                 ", quantity=" + quantity +
                 '}';
