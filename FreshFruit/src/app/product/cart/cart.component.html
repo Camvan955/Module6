@@ -11,28 +11,34 @@
                     <div class="d-flex justify-content-between align-items-center">
                       <h1 class="fw-bold mb-0 ">Giỏ hàng của bạn</h1>
                     </div>
+                    <div class="mt-5">
+                      <b>
+                        <span style="margin-left: 10px">Hình ảnh</span>
+                        <span style="margin-left: 65px">Tên sản phẩm</span>
+                        <span style="margin-left: 60px">Số lượng</span>
+                        <span style="margin-left: 60px">Giá/kg</span>
+                        <span style="margin-left: 80px">Thành tiền</span>
+                      </b>
+                    </div>
                     <hr class="my-4">
                     <div>
-                      <div class="row mb-4 d-flex justify-content-between align-items-center" *ngFor="let item of carts">
+                      <div class="row mb-4 d-flex justify-content-between align-items-center"
+                           *ngFor="let item of carts">
                         <div class="col-md-2 col-lg-2 col-xl-2">
-                          <img src="{{item.imageProduct}}"class="img-fluid rounded-3">
+                          <img src="{{item.imageProduct}}" class="img-fluid rounded-3">
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
                           <h6 class="text-black mb-0">{{item.nameProduct}}</h6>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                          <button class="btn btn-link px-2"
-                                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                            <i class="fas fa-minus"></i>
-                          </button>
 
-                          <input id="form" min="1" name="quantity" [value]="item.quantity" type="number"
-                                 class="form-control form-control-md" style="width: 50px"/>
+                          <input id="form" name="quantity" [value]="item.quantity"
+                                 class="form-control form-control-md" style="width: 50px" readonly/>
 
-                          <button class="btn btn-link px-2"
-                                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                            <i class="fas fa-plus"></i>
-                          </button>
+                          <!--                          <button class="btn btn-link px-2"-->
+                          <!--                                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">-->
+                          <!--                            <i class="fas fa-plus"></i>-->
+                          <!--                          </button>-->
                         </div>
                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                           <h6 class="mb-0">{{item.price | number}}đ</h6>
@@ -41,14 +47,17 @@
                           <a class="text-muted"><i class="fas fa-times"></i></a>
                         </div>
                       </div>
-                      <hr class="my-4">
+                        <hr class="my-4">
+                      <button class="btn btn-success" style="margin-left: 45%; margin-top: 5%" routerLink="/home">Mua thêm</button>
                     </div>
                   </div>
                   <ng-template #elseBlock>
                     <div style="margin-left: 30%; margin-top: 20%">
-                    <img src="../../../assets/images/gio hang trong.png" height="210" width="300"/>
+                      <img src="../../../assets/images/gio hang trong.png" height="210" width="300"/>
                     </div>
-                    <button class="btn btn-success" style="margin-left: 42%; margin-top: 3%" routerLink="/home">Quay lại</button>
+                    <button class="btn btn-success" style="margin-left: 42%; margin-top: 3%" routerLink="/home">Quay
+                      lại
+                    </button>
                   </ng-template>
                 </div>
                 <div class="col-lg-4 bg-grey">

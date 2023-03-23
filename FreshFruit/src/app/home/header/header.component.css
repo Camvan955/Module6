@@ -8,6 +8,7 @@ nav {
   padding: 1% 1%;
   justify-content: space-between;
   align-items: center;
+
 }
 
 nav img {
@@ -19,6 +20,7 @@ nav img {
   /*color: green;*/
   flex: 1;
   /*text-align: right;*/
+
 }
 
 .nav-links ul li {
@@ -416,7 +418,7 @@ nav .fa {
 
 .dropdown {
   position: relative;
-  display: inline-block;
+  /*display: inline-block;*/
 }
 
 .dropdown-content {

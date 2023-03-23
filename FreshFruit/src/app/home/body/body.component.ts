@@ -22,6 +22,8 @@ export class BodyComponent implements OnInit {
   last: any;
   first: any;
   role: String = "";
+  id = 0;
+  name = '';
 
   cart: Cart = {
     id: 0,
@@ -71,6 +73,27 @@ export class BodyComponent implements OnInit {
     });
   }
 
+  deleteProduct(idProduct: any) {
+    this.produceService.removeProduct(idProduct).subscribe(data => {
+      this.getNewProduct(this.size);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Xóa sản phẩm thành công!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }, error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Xóa sản phẩm thất bại',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
+  }
+
   addToCart(ids: number, images: string, names: string, prices: number) {
     if (this.tokenStorageService.getCart() != undefined) {
       this.cartt = this.tokenStorageService.getCart();
@@ -108,5 +131,10 @@ export class BodyComponent implements OnInit {
         timer: 1000
       })
     }
+  }
+
+  getItem(idProduct: number, nameProduct: string) {
+    this.id = idProduct;
+    this.name = nameProduct;
   }
 }

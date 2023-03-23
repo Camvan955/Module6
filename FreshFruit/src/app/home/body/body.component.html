@@ -170,21 +170,42 @@
           <div class="packages-content">
             <div class="row">
               <div class="col-4 col-md-4 col-sm-6 filtr-container" *ngFor="let item of pageProduct">
-                <div class="single-package-item filtr-item" style="text-align: center">
+                <div class="single-package-item filtr-item" style="position: relative">
+
+                  <div style="position: absolute;right: 7%; top: 3%; z-index: 1" *ngIf="role == 'ROLE_ADMIN'">
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" (click)="getItem(item.idProduct,item.nameProduct)" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            style="border-radius: 50%">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+
                   <a [routerLink]="['/home/detail', item.idProduct]">
-                    <img style="height: 300px;width: 370px" [src]="item.image"
-                         alt="package-place"/></a>
+                    <img style="height: 300px;width: 370px; border-radius: 10px" [src]="item.image"
+                         alt="package-place"/>
+                  </a>
+
                   <div class="single-package-item-txt">
                     <h4 class="mt-3">{{item.nameProduct}}</h4>
                     <p>Giá: <span> {{item.price | number }}đ</span></p>
                     <div class="btn" *ngIf="role != 'ROLE_ADMIN'">
-                      <button class="btn btn-success" type="button" (click)="addToCart(item.idProduct, item.image, item.nameProduct, item.price)">
+                      <button class="btn btn-success" type="button"
+                              (click)="addToCart(item.idProduct, item.image, item.nameProduct, item.price)">
                         Thêm vào giỏ hàng
                       </button>
                     </div>
+
+                    <div class="btn" *ngIf="role == 'ROLE_ADMIN'">
+                      <button class="btn btn-primary" type="button">
+                        Chỉnh sửa
+                      </button>
+                    </div>
                   </div>
+
                 </div>
               </div>
+
               <div class="mb-5 mt-2">
                 <a style="cursor: pointer; color: #151414; text-decoration: none" type="button"
                    (click)="getNewProduct(size+3)" *ngIf="!last">
@@ -208,6 +229,25 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xác nhận lại</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       Bạn có muốn xóa sản phẩm <b class="text-uppercase">{{name}}</b> không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteProduct(id)">Xóa</button>
       </div>
     </div>
   </div>

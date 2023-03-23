@@ -47,7 +47,7 @@ export class DetailComponent implements OnInit {
       this.cartt.nameProduct = item.nameProduct;
       this.cartt.imageProduct = item.image;
       this.cartt.price = item.price;
-      if (this.tokenStorageService.checkExistName(item.nameProduct)) {
+      if (this.tokenStorageService.checkExistId(item.idProduct)) {
         this.tokenStorageService.upQuantityProduct(item.idProduct, this.cartList);
       } else {
         this.cartt.quantity = 1;

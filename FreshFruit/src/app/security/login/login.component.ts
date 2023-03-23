@@ -42,10 +42,10 @@ export class LoginComponent implements OnInit {
         data => {
           if (this.formGroup.value.rememberMe) {
             this.tokenStorageService.saveTokenLocal(data.token);
-            this.tokenStorageService.saveUserLocal(data, data.email, data.id, data.username, data.name, data.roles, data.avatar);
+            this.tokenStorageService.saveUserLocal(data, data.email, data.idAccount, data.username, data.name, data.roles, data.avatar);
           } else {
             this.tokenStorageService.saveTokenSession(data.token);
-            this.tokenStorageService.saveUserSession(data, data.email, data.id, data.username, data.name, data.roles, data.avatar);
+            this.tokenStorageService.saveUserSession(data, data.email, data.idAccount, data.username, data.name, data.roles, data.avatar);
           }
           const user = this.tokenStorageService.getUser();
           console.log(user);

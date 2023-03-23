@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {TokenStorageService} from "./authentication/token-storage.service";
 import {Cart} from "../entity/cart";
 import {Product} from "../entity/product";
+import {Category} from "../entity/category";
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,15 @@ export class ProductService {
     return this.httpClient.get<any>(this.URL_PRODUCT + '?' + 'size=' + size);
   }
 
-  getProductById(idProduct: number): Observable<Product>{
-    return this.httpClient.get<Product>(this.URL_PRODUCT+ "/detail/"+ idProduct);
+  getProductById(idProduct: number): Observable<Product> {
+    return this.httpClient.get<Product>(this.URL_PRODUCT + "/detail/" + idProduct);
   }
 
-  // sell(cart: Cart[]): Observable<any>{
-  //   return this.httpClient.post<any>(this.URL_PRODUCT+ "/order", {idAccount: this.tokenStorageService.getIdAccount(), })
-  // }
+  removeProduct(idProduct: number){
+    return this.httpClient.delete(this.URL_PRODUCT + "/delete/" + idProduct);
+  }
+
+  getListCategory(): Observable<Category[]>{
+    return this.httpClient.get<Category[]>(this.URL_PRODUCT+ "/category");
+  }
 }
