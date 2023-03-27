@@ -21,15 +21,19 @@ export class ProductService {
     return this.httpClient.get<any>(this.URL_PRODUCT + '?' + 'size=' + size);
   }
 
+  searchProductByName(search: any, size: number): Observable<any> {
+    return this.httpClient.get<any>(this.URL_PRODUCT + '?' +'size=' +size + '&search=' + search );
+  }
+
   getProductById(idProduct: number): Observable<Product> {
     return this.httpClient.get<Product>(this.URL_PRODUCT + "/detail/" + idProduct);
   }
 
-  removeProduct(idProduct: number){
+  removeProduct(idProduct: number) {
     return this.httpClient.delete(this.URL_PRODUCT + "/delete/" + idProduct);
   }
 
-  getListCategory(): Observable<Category[]>{
-    return this.httpClient.get<Category[]>(this.URL_PRODUCT+ "/category");
+  getListCategory(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.URL_PRODUCT + "/category");
   }
 }

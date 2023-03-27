@@ -15,9 +15,8 @@
                       <b>
                         <span style="margin-left: 10px">Hình ảnh</span>
                         <span style="margin-left: 65px">Tên sản phẩm</span>
-                        <span style="margin-left: 60px">Số lượng</span>
-                        <span style="margin-left: 60px">Giá/kg</span>
-                        <span style="margin-left: 80px">Thành tiền</span>
+                        <span style="margin-left: 120px">Số lượng</span>
+                        <span style="margin-left: 140px">Giá/kg</span>
                       </b>
                     </div>
                     <hr class="my-4">
@@ -35,10 +34,6 @@
                           <input id="form" name="quantity" [value]="item.quantity"
                                  class="form-control form-control-md" style="width: 50px" readonly/>
 
-                          <!--                          <button class="btn btn-link px-2"-->
-                          <!--                                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">-->
-                          <!--                            <i class="fas fa-plus"></i>-->
-                          <!--                          </button>-->
                         </div>
                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                           <h6 class="mb-0">{{item.price | number}}đ</h6>

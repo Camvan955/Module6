@@ -15,6 +15,7 @@ import {Title} from "@angular/platform-browser";
 })
 export class BodyComponent implements OnInit {
   pageProduct: Product[] = [];
+  page: any;
   numberPage: number = 0;
   product: Product = {idProduct: 0, price: 0, image: '', nameProduct: '', description: ''};
   totalPages = 0;
@@ -24,7 +25,7 @@ export class BodyComponent implements OnInit {
   role: String = "";
   id = 0;
   name = '';
-
+  search = '';
   cart: Cart = {
     id: 0,
     nameProduct: '',
@@ -53,34 +54,42 @@ export class BodyComponent implements OnInit {
 
   ngOnInit(): void {
     window.scroll(0, 0);
-    this.getNewProduct(this.size);
+    this.searchProductByName(this.size);
     this.shareService.getClickEvent().subscribe(next => {
       this.role = this.getRole();
     })
   }
 
-  getNewProduct(size: number) {
-    this.produceService.getListNewProduct(size).subscribe(data => {
-      if (data != null) {
+  searchProductByName(size: number) {
+    this.produceService.searchProductByName(this.search.trim(), size).subscribe(data => {
+      this.page = data;
+      if(data){
         this.pageProduct = data.content;
         this.numberPage = data.number;
         this.size = data.size;
         this.totalPages = data.totalPages;
         this.first = data.first;
         this.last = data.last;
-        this.shareService.sendClickEvent();
       }
-    });
+    }, error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Danh sách rỗng',
+        showConfirmButton: true,
+        timer: 1500,
+      }, )
+    })
   }
 
   deleteProduct(idProduct: any) {
     this.produceService.removeProduct(idProduct).subscribe(data => {
-      this.getNewProduct(this.size);
+      this.searchProductByName(this.size);
       Swal.fire({
         position: 'center',
         icon: 'success',
         title: 'Xóa sản phẩm thành công!',
-        showConfirmButton: false,
+        showConfirmButton: true,
         timer: 1500
       })
     }, error => {
