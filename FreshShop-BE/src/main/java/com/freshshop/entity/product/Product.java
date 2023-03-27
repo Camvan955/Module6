@@ -1,5 +1,6 @@
 package com.freshshop.entity.product;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,13 +26,12 @@ public class Product {
     @Column(columnDefinition = "LONGTEXT")
     private String image;
     private Boolean flagDelete;
+    private String origin;
 
     @ManyToOne()
+    @JsonBackReference
     @JoinColumn(name = "id_category", nullable = false, referencedColumnName = "id_category")
     private Category category;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_origin", nullable = false, referencedColumnName = "id_origin")
-    private Origin origin;
 
 }

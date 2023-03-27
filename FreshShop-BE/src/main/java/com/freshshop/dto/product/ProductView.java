@@ -5,5 +5,4 @@ Integer getIdProduct();
 String getNameProduct();
 Double getPrice();
 String getImage();
-Boolean getFlagDelete();
 }

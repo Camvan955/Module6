@@ -16,10 +16,14 @@ public class ProductService implements IProductService {
     @Autowired
     private IProductRepository productRepository;
 
-
     @Override
     public Page<ProductView> pageProduct(Pageable pageable) {
         return productRepository.pageProduct(pageable);
+    }
+
+    @Override
+    public Page<ProductView> pageBySearchProduct(String search, Pageable pageable) {
+        return productRepository.pageBySearchProduct(search, pageable);
     }
 
     @Override
@@ -33,8 +37,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Page<ProductView> pageProductByCategory(Integer idProduct, Pageable pageable) {
-        return productRepository.pageProductByCategory(idProduct, pageable);
+    public Page<ProductView> pageProductByCategory(Integer id, Pageable pageable) {
+        return productRepository.pageProductByCategory(id, pageable);
     }
 
 

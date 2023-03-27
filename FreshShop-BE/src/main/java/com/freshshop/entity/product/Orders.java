@@ -19,7 +19,7 @@ public class Orders {
     @Column(name = "id_order")
     private Integer idOrder;
     private String dateOrder;
-    private Boolean paymentStatus;
+    private Integer paymentStatus = 0;
     @Column(columnDefinition = "bit default false")
     private Boolean flagDelete;
 
@@ -27,8 +27,5 @@ public class Orders {
     @JoinColumn(name = "id_account")
     private Account account;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_payment", nullable = false, referencedColumnName = "id_payment")
-    private Payment payment;
 }
 
