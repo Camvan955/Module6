@@ -1,5 +1,7 @@
-package com.freshshop.entity.product;
+package com.freshshop.entity.order;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.freshshop.entity.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +21,12 @@ public class OrderDetail {
     private Integer idOrderDetail;
 
     @ManyToOne
-    @JoinColumn(name = "id_order",nullable = false, referencedColumnName = "id_order")
-    private Orders order;
+    @JsonBackReference
+    @JoinColumn(name = "id_order", referencedColumnName = "id_order")
+    private Orders orders;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "id_product", nullable = false, referencedColumnName = "id_product")
     private Product product;
 

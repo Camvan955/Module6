@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {Cart} from "../../entity/cart";
 import Swal from "sweetalert2";
+import {OrderService} from "../../service/order/order.service";
 
 @Component({
   selector: 'app-cart',
@@ -17,26 +18,42 @@ export class CartComponent implements OnInit {
 
   constructor(private tokenStorageService: TokenStorageService,
               private router: Router,
-              private title: Title) {
+              private title: Title,
+              private orderService: OrderService) {
     this.title.setTitle("Giỏ hàng")
   }
 
   ngOnInit(): void {
-    if (this.tokenStorageService.getCart() == undefined) {
-      this.length = 0;
-    } else {
-      this.carts = this.tokenStorageService.getCart();
-      this.total = this.getTotalPay();
-      this.length = this.carts.length;
-    }
+    // if (this.tokenStorageService.getCart() == undefined) {
+    //   this.length = 0;
+    // } else {
+    //   this.carts = this.tokenStorageService.getCart();
+    //   this.total = this.getTotalPay();
+    //   this.length = this.carts.length;
+    // }
+    // this.getAllCart()
   }
 
-  getTotalPay() {
-    for (let i = 0; i < this.carts.length; i++) {
-      this.total += (this.carts[i].quantity * this.carts[i].price)
-    }
-    return this.total;
+  getAllCart(idOrder: number){
+    this.orderService.getCartList(idOrder).subscribe(data => {
+      this.carts = data;
+    })
+
   }
+
+
+
+
+
+
+
+
+  // getTotalPay() {
+  //   for (let i = 0; i < this.carts.length; i++) {
+  //     this.total += (this.carts[i].quantity * this.carts[i].price)
+  //   }
+  //   return this.total;
+  // }
 
   // buy() {
   //   if (this.tokenStorageService.isLogger()) {

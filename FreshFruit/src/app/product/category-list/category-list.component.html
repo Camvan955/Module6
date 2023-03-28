@@ -19,9 +19,10 @@
                 </p>
               </div>
               <div class="about-btn">
-                <button class="btn btn-success mb-3">
-                  Chi tiết
-                </button>
+                <a class="btn btn-success mb-3" [routerLink]="['/product/category/list-by-category', item.idCategory]" >
+                  Xem sản phẩm
+                </a>
+
               </div>
             </div>
           </div>

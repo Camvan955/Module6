@@ -22,7 +22,7 @@ export class ProductService {
   }
 
   searchProductByName(search: any, size: number): Observable<any> {
-    return this.httpClient.get<any>(this.URL_PRODUCT + '?' +'size=' +size + '&search=' + search );
+    return this.httpClient.get<any>(this.URL_PRODUCT + '?' + 'size=' + size + '&search=' + search);
   }
 
   getProductById(idProduct: number): Observable<Product> {
@@ -35,5 +35,9 @@ export class ProductService {
 
   getListCategory(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(this.URL_PRODUCT + "/category");
+  }
+
+  getProductListByCategory(idCategory: number, size: number): Observable<any> {
+    return this.httpClient.get<any>(this.URL_PRODUCT +'/by-id' + '?' + 'size=' + size + "&id=" + idCategory);
   }
 }

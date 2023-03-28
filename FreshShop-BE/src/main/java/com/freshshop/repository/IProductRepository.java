@@ -22,7 +22,7 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
             "     , price\n" +
             "     , image\n" +
             "     , flag_delete  as flagDelete\n" +
-            "from `fresh_shop`.`product` where flag_delete = false order by id_product desc",
+            "from `fresh_shopp`.`product` where flag_delete = false order by id_product desc",
             nativeQuery = true)
     Page<ProductView> pageProduct(Pageable pageable);
 
@@ -31,25 +31,25 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
             "price ,\n" +
             "image ,\n" +
             "flag_delete as flagDelete\n" +
-            "from `fresh_shop`.`product`\n" +
+            "from `fresh_shopp`.`product`\n" +
             "where (name_product like concat('%', :search, '%')\n" +
             "and flag_delete = false) order by id_product desc", countQuery = "select id_product as idProduct, name_product as nameProduct, price ,\n" +
             "image ,\n" +
             "flag_delete as flagDelete\n" +
-            "from `fresh_shop`.`product`\n" +
+            "from `fresh_shopp`.`product`\n" +
             "where (name_product like concat('%', :search, '%')\n" +
             "and flag_delete = false) order by id_product desc",
             nativeQuery = true)
     Page<ProductView> pageBySearchProduct(@Param("search") String search, Pageable pageable);
 
-    @Query(value = "select * from fresh_shop.product where flag_delete= false and id_product=:idProduct", nativeQuery = true)
+    @Query(value = "select * from fresh_shopp.product where flag_delete= false and id_product=:idProduct", nativeQuery = true)
     Optional<Product> findProductById(@Param("idProduct") Integer idProduct);
 
     @Modifying
-    @Query(value = "update `fresh_shop`.`product` set flag_delete = true where id_product = :idProduct", nativeQuery = true)
+    @Query(value = "update `fresh_shopp`.`product` set flag_delete = true where id_product = :idProduct", nativeQuery = true)
     void removeProduct(Integer idProduct);
 
-    @Query(value = "select id_product as idProduct, name_product as nameProduct, price, image from `fresh_shop`.`product` where flag_delete = false and id_category = :id", nativeQuery = true)
+    @Query(value = "select id_product as idProduct, name_product as nameProduct, price, image from `fresh_shopp`.`product` where flag_delete = false and id_category = :id", nativeQuery = true)
     Page<ProductView> pageProductByCategory(@Param("id") Integer id, Pageable pageable);
 
 

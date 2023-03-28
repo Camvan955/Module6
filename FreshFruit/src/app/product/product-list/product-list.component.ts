@@ -1,19 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../entity/product";
 import {ProductService} from "../../service/product.service";
+import {Title} from "@angular/platform-browser";
 import {ActivatedRoute} from "@angular/router";
+import Swal from "sweetalert2";
 import {ShareService} from "../../service/authentication/share.service";
 import {TokenStorageService} from "../../service/authentication/token-storage.service";
-import {Cart} from "../../entity/cart";
-import Swal from "sweetalert2";
-import {Title} from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-body',
-  templateUrl: './body.component.html',
-  styleUrls: ['./body.component.css']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
 })
-export class BodyComponent implements OnInit {
+export class ProductListComponent implements OnInit {
   pageProduct: Product[] = [];
   page: any;
   numberPage: number = 0;
@@ -26,25 +25,24 @@ export class BodyComponent implements OnInit {
   id = 0;
   name = '';
   search = '';
-  cart: Cart = {
-    id: 0,
-    nameProduct: '',
-    price: 0,
-    imageProduct: '',
-    quantity: 0
-  };
-  cartt: Cart[] = [];
 
   constructor(private produceService: ProductService,
               private activatedRoute: ActivatedRoute,
               private shareService: ShareService,
               private tokenStorageService: TokenStorageService,
               private title: Title) {
-    this.title.setTitle("Trang chủ")
+
+    this.title.setTitle("Sản phẩm theo danh mục");
     this.shareService.getClickEvent().subscribe(next => {
       this.role = this.getRole();
     })
-
+    this.activatedRoute.paramMap.subscribe(next => {
+      this.id = parseInt(<string>next.get('id'));
+      console.log(this.id)
+      this.produceService.getProductListByCategory(this.id, this.size).subscribe(data => {
+        this.product = data;
+      })
+    });
   }
 
   getRole() {
@@ -57,8 +55,29 @@ export class BodyComponent implements OnInit {
 
   ngOnInit(): void {
     window.scroll(0, 0);
-    this.searchProductByName(this.size);
+    this.searchProductByCategory(this.size);
     this.role = this.getRole();
+  }
+
+  searchProductByCategory(size: number) {
+    this.produceService.getProductListByCategory(this.id, size).subscribe(data => {
+      if (data) {
+        this.pageProduct = data.content;
+        this.numberPage = data.number;
+        this.size = data.size;
+        this.totalPages = data.totalPages;
+        this.first = data.first;
+        this.last = data.last;
+      }
+    }, error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Danh sách rỗng',
+        showConfirmButton: true,
+        timer: 1500,
+      },)
+    })
   }
 
   searchProductByName(size: number) {
@@ -102,45 +121,6 @@ export class BodyComponent implements OnInit {
         timer: 1500
       })
     })
-  }
-
-  addToCart(ids: number, images: string, names: string, prices: number) {
-    if (this.tokenStorageService.getCart() != undefined) {
-      this.cartt = this.tokenStorageService.getCart();
-      this.cart.id = ids;
-      this.cart.imageProduct = images;
-      this.cart.nameProduct = names;
-      this.cart.price = prices;
-      if (this.tokenStorageService.checkExistId(ids)) {
-        this.tokenStorageService.upQuantityProduct(ids, this.cartt)
-      } else {
-        this.cart.quantity = 1;
-        this.cartt.push(this.cart);
-      }
-      this.tokenStorageService.setCart(this.cartt);
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Đã thêm sản phẩm ' + this.cart.nameProduct + ' vào giỏ hàng',
-        showConfirmButton: false,
-        timer: 1000
-      })
-    } else {
-      this.cart.id = ids;
-      this.cart.imageProduct = images;
-      this.cart.nameProduct = names;
-      this.cart.price = prices;
-      this.cart.quantity = 1;
-      this.cartt.push(this.cart);
-      this.tokenStorageService.setCart(this.cartt);
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Đã thêm sản phẩm ' + this.cart.nameProduct + ' vào giỏ hàng',
-        showConfirmButton: false,
-        timer: 1000
-      })
-    }
   }
 
   getItem(idProduct: number, nameProduct: string) {

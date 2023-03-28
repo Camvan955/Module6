@@ -39,8 +39,8 @@ public class ProductRestController {
         return new ResponseEntity<>(productPage, HttpStatus.OK);
     }
 
-    @GetMapping("/by-id/{id}")
-    public ResponseEntity<Page<ProductView>> getProductByCategory(@PageableDefault(page = 0, size = 3) Pageable pageable, @PathVariable Integer id) {
+    @GetMapping("/by-id")
+    public ResponseEntity<Page<ProductView>> getProductByCategory(@PageableDefault(size = 3) Pageable pageable, @RequestParam Integer id) {
         Page<ProductView> productViews = productService.pageProductByCategory(id, pageable);
         if (productViews.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

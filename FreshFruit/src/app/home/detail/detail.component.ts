@@ -17,7 +17,6 @@ export class DetailComponent implements OnInit {
   productt: Product = {idProduct: 0, price: 0, nameProduct: '', image: '', description: ''};
   cartt: Cart = {id: 0, price: 0, quantity: 0};
   cartList: Cart[] = [];
-  quantity = 1;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
