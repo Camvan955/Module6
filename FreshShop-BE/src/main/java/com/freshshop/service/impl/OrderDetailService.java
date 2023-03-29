@@ -25,7 +25,28 @@ public class OrderDetailService implements IOrderDetailService {
     }
 
     @Override
+    public List<OrderDetailDto> getOrderDetailByIdAccount(Long idAccount) {
+        return orderDetailRepository.getOrderDetail(idAccount);
+    }
+
+    @Override
     public List<OrderDetailDto> getOrderDetailByIdOrder(Integer idOrder) {
         return orderDetailRepository.getOrderDetailByIdOrder(idOrder);
     }
+
+    @Override
+    public void addOrderDetail(Integer idOrder, Integer idProduct, Integer quantity) {
+        orderDetailRepository.addOrderDetail(idOrder, idProduct, quantity);
+    }
+
+    @Override
+    public void updateQuantity(Integer idOrder, Integer idProduct, Integer quantity) {
+        orderDetailRepository.updateQuantity(idOrder, idProduct, quantity);
+    }
+
+    @Override
+    public void deleteOrderDetail(Integer idOrder, Integer idProduct) {
+        orderDetailRepository.deleteOrderDetail(idOrder, idProduct);
+    }
+
 }

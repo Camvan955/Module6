@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 })
 export class DetailComponent implements OnInit {
   productt: Product = {idProduct: 0, price: 0, nameProduct: '', image: '', description: ''};
-  cartt: Cart = {id: 0, price: 0, quantity: 0};
+  cartt: Cart = {idProduct: 0, price: 0, quantity: 0};
   cartList: Cart[] = [];
 
   constructor(private productService: ProductService,
@@ -41,10 +41,10 @@ export class DetailComponent implements OnInit {
     if (this.tokenStorageService.getCart()) {
       this.cartList = this.tokenStorageService.getCart();
       if (item.idProduct != null) {
-        this.cartt.id = item.idProduct;
+        this.cartt.idProduct = item.idProduct;
       }
       this.cartt.nameProduct = item.nameProduct;
-      this.cartt.imageProduct = item.image;
+      this.cartt.image = item.image;
       this.cartt.price = item.price;
       if (this.tokenStorageService.checkExistId(item.idProduct)) {
         this.tokenStorageService.upQuantityProduct(item.idProduct, this.cartList);
@@ -62,10 +62,10 @@ export class DetailComponent implements OnInit {
       })
     } else {
       if (item.idProduct != null) {
-        this.cartt.id = item.idProduct;
+        this.cartt.idProduct = item.idProduct;
       }
       this.cartt.nameProduct = item.nameProduct;
-      this.cartt.imageProduct = item.image;
+      this.cartt.image = item.image;
       this.cartt.price = item.price;
       this.cartt.quantity = 1;
       this.cartList.push(this.cartt);

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Cart} from "../../entity/cart";
-import Order = jasmine.Order;
 import {Orders} from "../../entity/orders";
 
 @Injectable({
@@ -18,8 +17,27 @@ export class OrderService {
     return this.httpClient.get<Cart[]>(this.URL_ORDER + '/list-order-detail/' + idOrder);
   }
 
-  getOrderByIdAccount(idAccount: number): Observable<Orders> {
+  getOrderDetailByIdAccount(idAccount: number): Observable<Cart> {
+    return this.httpClient.get<Cart>(this.URL_ORDER + '/list-order-detail/' + idAccount);
+  }
+
+  addOrderByIdAccount(idAccount: number) {
+    return this.httpClient.post(this.URL_ORDER + '/add', {idAccount: idAccount});
+  }
+
+  getOrderByIdAccount(idAccount: number): Observable<Orders>{
     return this.httpClient.get<Orders>(this.URL_ORDER + '/' + idAccount);
   }
 
+  getListOrderDetailByIdOrder(idOrder: number): Observable<Cart> {
+    return this.httpClient.get<Cart>(this.URL_ORDER + '/list-by-id-order/' + idOrder);
+  }
+
+  addOrderDetailByIdOrder(idOrder: number, idProduct: number, qty: number) {
+    return this.httpClient.post(this.URL_ORDER + '/add-order-detail', {idOrder: idOrder, idProduct: idProduct, quantity: qty});
+  }
+
+  removeOrderDetail(idOrder: number, idProduct: number){
+    return this.httpClient.delete(this.URL_ORDER + '/delete?idOrder='+ idOrder + '&idProduct=' + idProduct);
+  }
 }

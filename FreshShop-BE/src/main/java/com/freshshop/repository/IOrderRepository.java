@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
+@Transactional
 public interface IOrderRepository extends JpaRepository<Orders, Integer> {
 
     @Query(value = "select * from `fresh_shopp`.orders " +
@@ -16,6 +17,8 @@ public interface IOrderRepository extends JpaRepository<Orders, Integer> {
     Optional<Orders> getOrderByIdAccount(@Param("id") Long idAccount);
 
     @Modifying
-    @Query(value = "insert into fresh_shopp.orders(id_account, payment_status) value (:idAccount, false)", nativeQuery = true)
+    @Query(value = "insert into `fresh_shopp`.orders(id_account, payment_status) values (:idAccount, false)", nativeQuery = true)
     void addOrder(@Param("idAccount") Long idAccount);
+
+
 }

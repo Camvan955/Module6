@@ -7,7 +7,7 @@
             <div class="card-body p-0">
               <div class="row g-0">
                 <div class="col-lg-8">
-                  <div class="p-5" *ngIf="length != 0; else elseBlock">
+                  <div class="p-5" *ngIf="cart.length != 0; else elseBlock">
                     <div class="d-flex justify-content-between align-items-center">
                       <h1 class="fw-bold mb-0 ">Giỏ hàng của bạn</h1>
                     </div>
@@ -22,9 +22,9 @@
                     <hr class="my-4">
                     <div>
                       <div class="row mb-4 d-flex justify-content-between align-items-center"
-                           *ngFor="let item of carts">
+                           *ngFor="let item of cart">
                         <div class="col-md-2 col-lg-2 col-xl-2">
-                          <img src="{{item.imageProduct}}" class="img-fluid rounded-3">
+                          <img src="{{item.image}}" class="img-fluid rounded-3" style="width: 200px; height: 100px">
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
                           <h6 class="text-black mb-0">{{item.nameProduct}}</h6>
@@ -39,7 +39,9 @@
                           <h6 class="mb-0">{{item.price | number}}đ</h6>
                         </div>
                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                          <a class="text-muted"><i class="fas fa-times"></i></a>
+                          <a class="text-muted" (click)="removeOrderDetail(idOrder, item.idProduct)">
+                            <i class="fas fa-times"></i>
+                          </a>
                         </div>
                       </div>
                         <hr class="my-4">
@@ -61,7 +63,7 @@
                     <hr class="my-4">
 
                     <div class="d-flex justify-content-between mb-4">
-                      <h5>Số mặt hàng: <span style="margin-left: 10px">{{length}}</span></h5>
+                      <h5>Số mặt hàng: <span style="margin-left: 10px">{{cart.length}}</span></h5>
 
                     </div>
 

@@ -7,6 +7,7 @@ import {TokenStorageService} from "../../service/authentication/token-storage.se
 import {Cart} from "../../entity/cart";
 import Swal from "sweetalert2";
 import {Title} from "@angular/platform-browser";
+import {OrderService} from "../../service/order/order.service";
 
 @Component({
   selector: 'app-body',
@@ -27,24 +28,27 @@ export class BodyComponent implements OnInit {
   name = '';
   search = '';
   cart: Cart = {
-    id: 0,
+    idProduct: 0,
     nameProduct: '',
     price: 0,
-    imageProduct: '',
+    image: '',
     quantity: 0
   };
-  cartt: Cart[] = [];
+  idOrder = 0;
 
   constructor(private produceService: ProductService,
               private activatedRoute: ActivatedRoute,
               private shareService: ShareService,
               private tokenStorageService: TokenStorageService,
+              private orderService: OrderService,
               private title: Title) {
-    this.title.setTitle("Trang chủ")
+    this.title.setTitle("Trang chủ");
+    this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
+      this.idOrder = next.idOrder;
+    })
     this.shareService.getClickEvent().subscribe(next => {
       this.role = this.getRole();
     })
-
   }
 
   getRole() {
@@ -104,43 +108,17 @@ export class BodyComponent implements OnInit {
     })
   }
 
-  addToCart(ids: number, images: string, names: string, prices: number) {
-    if (this.tokenStorageService.getCart() != undefined) {
-      this.cartt = this.tokenStorageService.getCart();
-      this.cart.id = ids;
-      this.cart.imageProduct = images;
-      this.cart.nameProduct = names;
-      this.cart.price = prices;
-      if (this.tokenStorageService.checkExistId(ids)) {
-        this.tokenStorageService.upQuantityProduct(ids, this.cartt)
-      } else {
-        this.cart.quantity = 1;
-        this.cartt.push(this.cart);
-      }
-      this.tokenStorageService.setCart(this.cartt);
+  addToCart(idProduct: number, nameProduct: string){
+    const qty = 1;
+    this.orderService.addOrderDetailByIdOrder(this.idOrder, idProduct, qty).subscribe(data =>{
       Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Đã thêm sản phẩm ' + this.cart.nameProduct + ' vào giỏ hàng',
-        showConfirmButton: false,
-        timer: 1000
-      })
-    } else {
-      this.cart.id = ids;
-      this.cart.imageProduct = images;
-      this.cart.nameProduct = names;
-      this.cart.price = prices;
-      this.cart.quantity = 1;
-      this.cartt.push(this.cart);
-      this.tokenStorageService.setCart(this.cartt);
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Đã thêm sản phẩm ' + this.cart.nameProduct + ' vào giỏ hàng',
-        showConfirmButton: false,
-        timer: 1000
-      })
-    }
+              position: 'center',
+              icon: 'success',
+              title: 'Đã thêm sản phẩm ' + nameProduct + ' vào giỏ hàng',
+              showConfirmButton: false,
+              timer: 1000
+            })
+    })
   }
 
   getItem(idProduct: number, nameProduct: string) {

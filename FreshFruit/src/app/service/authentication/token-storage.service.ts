@@ -114,10 +114,6 @@ export class TokenStorageService {
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  /**
-   * funtion:
-   *
-   */
   public getName(): string {
     if (localStorage.getItem(NAME_KEY) != null) {
       return <string>localStorage.getItem(NAME_KEY);
@@ -125,10 +121,6 @@ export class TokenStorageService {
     return <string>sessionStorage.getItem(NAME_KEY);
   }
 
-  /**
-   * funtion:
-   *
-   */
   public getEmail(): string {
     if (localStorage.getItem(EMAIL_KEY) != null) {
       return <string>localStorage.getItem(EMAIL_KEY);
@@ -187,7 +179,7 @@ export class TokenStorageService {
 
   upQuantityProduct(ids: number, cartList: Cart[]) {
     for (let i = 0; i < cartList.length; i++) {
-      if (cartList[i].id == ids) {
+      if (cartList[i].idProduct == ids) {
         cartList[i].quantity += 1;
         break;
       }

@@ -1,5 +1,5 @@
 export interface Orders {
-  idOrder?: number;
+  idOrder: number;
   dateOrder?: String;
   paymentStatus?: boolean;
   flagDelete?: boolean;

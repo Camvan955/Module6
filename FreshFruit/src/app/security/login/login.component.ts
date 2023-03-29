@@ -6,6 +6,7 @@ import {SecurityService} from "../../service/authentication/security.service";
 import {Title} from "@angular/platform-browser";
 import {ShareService} from "../../service/authentication/share.service";
 import Swal from "sweetalert2";
+import {OrderService} from "../../service/order/order.service";
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
               private shareService: ShareService,
               private route: ActivatedRoute,
               private securityService: SecurityService,
-              private titleService: Title) {
+              private titleService: Title,
+              private orderService: OrderService) {
     this.titleService.setTitle("Đăng nhập")
   }
 
@@ -48,12 +50,15 @@ export class LoginComponent implements OnInit {
             this.tokenStorageService.saveUserSession(data, data.email, data.idAccount, data.username, data.name, data.roles, data.avatar);
           }
           const user = this.tokenStorageService.getUser();
-          console.log(user);
           this.securityService.setIsLoggedIn(user, true);
           this.shareService.sendClickEvent();
           const id = this.tokenStorageService.getIdAccount();
           this.roles = this.tokenStorageService.getRole();
-          this.router.navigateByUrl('home');
+          console.log(this.roles[0], 'this.roles[0]')
+          if (this.roles[0] != 'ROLE_ADMIN'){
+            this.orderService.addOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe();
+          }
+            this.router.navigateByUrl('home');
           this.formGroup.reset();
           Swal.fire({
             position: 'center',

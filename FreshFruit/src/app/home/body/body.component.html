@@ -191,7 +191,7 @@
                     <p>Giá: <span> {{item.price | number }}đ</span></p>
                     <div class="btn" *ngIf="role != 'ROLE_ADMIN'">
                       <button class="btn btn-success" type="button"
-                              (click)="addToCart(item.idProduct, item.image, item.nameProduct, item.price)">
+                              (click)="addToCart(item.idProduct, item.nameProduct)">
                         Thêm vào giỏ hàng
                       </button>
                     </div>

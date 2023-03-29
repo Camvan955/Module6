@@ -8,6 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IOrderDetailService {
-    Optional<OrderDetail> getOrderDetailByIdOrderAndIdProduct(@Param("id") Long idAccount, @Param("id") Integer idProduct);
+    Optional<OrderDetail> getOrderDetailByIdOrderAndIdProduct(@Param("id") Long idAccount,
+                                                              @Param("id") Integer idProduct);
+
+    List<OrderDetailDto> getOrderDetailByIdAccount(Long idAccount);
+
     List<OrderDetailDto> getOrderDetailByIdOrder(Integer idOrder);
+
+    void addOrderDetail(Integer idOrder, Integer idProduct, Integer quantity);
+
+    void updateQuantity(Integer idOrder, Integer idProduct, Integer quantity);
+
+    void deleteOrderDetail(Integer idOrder,Integer idProduct);
 }

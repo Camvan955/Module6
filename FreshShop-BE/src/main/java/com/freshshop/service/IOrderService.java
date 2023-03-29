@@ -16,6 +16,6 @@ public interface IOrderService {
 
     Optional<Orders> getOrderByIdAccount(Long idAccount);
 
-    void addOrder(@Param("idAccount") Long idAccount);
+    void addOrder(Long idAccount);
 
 }
