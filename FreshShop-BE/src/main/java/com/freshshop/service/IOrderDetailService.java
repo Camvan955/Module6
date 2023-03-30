@@ -1,6 +1,7 @@
 package com.freshshop.service;
 
 import com.freshshop.dto.order.OrderDetailDto;
+import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
 import org.springframework.data.repository.query.Param;
 
@@ -20,4 +21,6 @@ public interface IOrderDetailService {
     void updateQuantity(Integer idOrder, Integer idProduct, Integer quantity);
 
     void deleteOrderDetail(Integer idOrder,Integer idProduct);
+
+    TotalPay getTotal(@Param("idOrder") Integer idOrder);
 }

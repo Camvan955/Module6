@@ -68,4 +68,8 @@ export class SecurityService {
   getIsLoggedIn(): Observable<boolean> {
     return this.isLoggedInObservable.asObservable();
   }
+
+  getInfoCustomer(idAccount: number): Observable<Account> {
+    return this.http.get<Account>(AUTH_API + 'info/'+ idAccount);
+  }
 }

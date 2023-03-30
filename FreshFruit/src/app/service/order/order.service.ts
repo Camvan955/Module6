@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Cart} from "../../entity/cart";
 import {Orders} from "../../entity/orders";
+import {TotalPay} from "../../entity/total-pay";
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,9 @@ export class OrderService {
 
   removeOrderDetail(idOrder: number, idProduct: number){
     return this.httpClient.delete(this.URL_ORDER + '/delete?idOrder='+ idOrder + '&idProduct=' + idProduct);
+  }
+
+  getTotalPay(idOrder: number): Observable<TotalPay>{
+    return this.httpClient.get<TotalPay>(this.URL_ORDER+'/total-pay/'+ idOrder);
   }
 }

@@ -3,12 +3,12 @@ package com.freshshop.controller;
 import com.freshshop.dto.order.OrderDetailDto;
 import com.freshshop.dto.order.OrdersDetailAdd;
 import com.freshshop.dto.order.OrdersDto;
+import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
 import com.freshshop.entity.order.Orders;
 import com.freshshop.service.impl.OrderDetailService;
 import com.freshshop.service.impl.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -87,5 +87,11 @@ public class OrderRestController {
     public ResponseEntity<?> removeOrderDetail(@RequestParam Integer idOrder,@RequestParam Integer idProduct){
         orderDetailService.deleteOrderDetail(idOrder, idProduct);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/total-pay/{idOrder}")
+    public ResponseEntity<TotalPay> getTotalByIdOrder(@PathVariable("idOrder") Integer idOrder){
+        TotalPay totalPay = orderDetailService.getTotal(idOrder);
+        return new ResponseEntity<>(totalPay, HttpStatus.OK);
     }
 }

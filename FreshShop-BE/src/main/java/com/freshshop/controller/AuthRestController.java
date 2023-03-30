@@ -1,12 +1,8 @@
 package com.freshshop.controller;
 
 import com.freshshop.dto.request.SignInForm;
-import com.freshshop.dto.request.SignUpForm;
 import com.freshshop.dto.response.JwtResponse;
-import com.freshshop.dto.response.ResponseMessage;
 import com.freshshop.entity.account.Account;
-import com.freshshop.entity.account.Role;
-import com.freshshop.entity.account.RoleName;
 import com.freshshop.jwt.JWTProvider;
 import com.freshshop.service.IAccountService;
 import com.freshshop.service.IRoleService;
@@ -68,4 +64,12 @@ public class AuthRestController {
                 roles));
     }
 
+    @GetMapping("/info/{idAccount}")
+    public ResponseEntity<?> getInfoByIdAccount(@PathVariable Long idAccount) {
+        Account account = iAccountService.getInfoById(idAccount).orElse(null);
+        if (account == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
 }

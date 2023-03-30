@@ -34,7 +34,7 @@
                   <i class="fas fa-minus"></i>
                 </button>
 
-                <input id="form2" min="1" name="quantity" value="1" type="number"
+                <input id="form2" min="1" name="quantity" #qty type="number" value="1"
                        class="form-control form-control-md" style="width: 50px"/>
 
                 <button class="btn btn-link px-2 " style="display: inline; width: 40px; margin-left: 5px"
@@ -44,7 +44,7 @@
               </div>
           </h6>
           <h5 class="colors">
-            <button style="width: 100%;" class="add-to-cart btn" type="button">Thêm vào giỏ hàng</button>
+            <a style="width: 100%;" class="add-to-cart btn" type="button"  (click)="addToCart(productt.idProduct, productt.nameProduct, qty.value)">Thêm vào giỏ hàng</a>
           </h5>
         </div>
       </div>

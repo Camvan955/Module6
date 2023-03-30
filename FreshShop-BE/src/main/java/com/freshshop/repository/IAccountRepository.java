@@ -21,4 +21,6 @@ public interface IAccountRepository extends JpaRepository<Account,Long> {
     @Query(value = "select * from `fresh_shopp`.account where username = :username", nativeQuery = true)
     Optional<Account> findByUsername(@Param("username") String username);
 
+    @Query(value = "select * from `fresh_shopp`.account where id_account = :idAccount", nativeQuery = true)
+    Optional<Account> getInfoById(@Param("idAccount") Long idAccount);
 }

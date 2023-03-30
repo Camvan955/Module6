@@ -1,6 +1,7 @@
 package com.freshshop.service.impl;
 
 import com.freshshop.dto.order.OrderDetailDto;
+import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
 import com.freshshop.entity.order.Orders;
 import com.freshshop.repository.IOrderDetailRepository;
@@ -47,6 +48,11 @@ public class OrderDetailService implements IOrderDetailService {
     @Override
     public void deleteOrderDetail(Integer idOrder, Integer idProduct) {
         orderDetailRepository.deleteOrderDetail(idOrder, idProduct);
+    }
+
+    @Override
+    public TotalPay getTotal(Integer idOrder) {
+        return orderDetailRepository.getTotal(idOrder);
     }
 
 }

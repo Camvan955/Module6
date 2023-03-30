@@ -1,7 +1,9 @@
 package com.freshshop.repository;
 
 import com.freshshop.dto.order.OrderDetailDto;
+import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -55,6 +57,9 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
                         @Param("quantity") Integer quantity);
 
     @Modifying
-    @Query(value ="delete from `fresh_shopp`.`order_detail` where id_order=:idOrder and id_product=:idProduct", nativeQuery = true)
-    void deleteOrderDetail(@Param("idOrder") Integer idOrder,@Param("idProduct") Integer idProduct);
+    @Query(value = "delete from `fresh_shopp`.`order_detail` where id_order=:idOrder and id_product=:idProduct", nativeQuery = true)
+    void deleteOrderDetail(@Param("idOrder") Integer idOrder, @Param("idProduct") Integer idProduct);
+
+    @Query(value = "select SUM(o.quantity* p.price) as totalPay, SUM(o.quantity) as totalQuantity from `fresh_shopp`.`order_detail` o join `fresh_shopp`.`product` p on p.id_product = o.id_product\n" + "where o.id_order=:idOrder", nativeQuery = true)
+    TotalPay getTotal(@Param("idOrder") Integer idOrder);
 }

@@ -14,4 +14,6 @@ public interface IAccountService {
 
     void save(Account account);
 
+    Optional<Account> getInfoById(Long idAccount);
+
 }

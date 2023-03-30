@@ -34,4 +34,9 @@ public class AccountServiceImpl implements IAccountService {
         iAccountRepository.save(account);
     }
 
+    @Override
+    public Optional<Account> getInfoById(Long idAccount) {
+        return iAccountRepository.getInfoById(idAccount);
+    }
+
 }
