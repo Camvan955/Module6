@@ -3,13 +3,15 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Cart} from "../../entity/cart";
 import {Orders} from "../../entity/orders";
-import {TotalPay} from "../../entity/total-pay";
+import {TotalPay} from "../../dto/total-pay";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
   URL_ORDER = "http://localhost:8080/order"
+  totalMoneyUSD: number | undefined;
+  exchangeRate: number = 23482.44687;
 
   constructor(private httpClient: HttpClient) {
   }
@@ -44,5 +46,10 @@ export class OrderService {
 
   getTotalPay(idOrder: number): Observable<TotalPay>{
     return this.httpClient.get<TotalPay>(this.URL_ORDER+'/total-pay/'+ idOrder);
+  }
+
+  updatePaymentStatus(idOrder: number){
+    // @ts-ignore
+    return this.httpClient.patch(this.URL_PRODUCT+'/payment/'+ idOrder);
   }
 }

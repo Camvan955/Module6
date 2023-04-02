@@ -62,4 +62,9 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
 
     @Query(value = "select SUM(o.quantity* p.price) as totalPay, SUM(o.quantity) as totalQuantity from `fresh_shopp`.`order_detail` o join `fresh_shopp`.`product` p on p.id_product = o.id_product\n" + "where o.id_order=:idOrder", nativeQuery = true)
     TotalPay getTotal(@Param("idOrder") Integer idOrder);
+
+    @Modifying
+    @Query(value = "update `fresh_shopp`.`orders` set payment_status = true where id_order=:idOrder", nativeQuery = true)
+    void updatePaymentStatus(@Param("idOrder") Integer idOrder);
+
 }

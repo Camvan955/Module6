@@ -1,0 +1,255 @@
+.payment-delivery-info {
+  width: 100%;
+  margin: 24px 0 12px;
+  border-top: 3px solid transparent;
+  padding: 21px 30px;
+  border-image: 3
+  repeating-linear-gradient(
+    45deg,
+    red 0,
+    red 1em,
+    transparent 0,
+    transparent 2em,
+    #58a 0,
+    #58a 3em,
+    transparent 0,
+    transparent 4em
+  );
+}
+
+.payment-delivery-info__heading {
+  display: flex;
+  color: #f05e41;
+  font-size: 2.4rem;
+  font-weight: 400;
+  width: 100%;
+  margin: 18px 0;
+}
+
+.payment-delivery-info__heading-icon {
+  margin-right: 3px;
+  position: relative;
+  bottom: 6px;
+  left: -3px;
+}
+
+.payment-delivery-info__personal-information {
+  margin: 9px 0;
+  display: flex;
+}
+
+.personal-information__name,
+.personal-information__phone-number {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.personal-information__phone-number {
+  margin-left: 9px;
+}
+
+.personal-information__address {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-left: 15px;
+}
+
+.payment-product-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-product-list__header {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.payment-product-list__header-heading {
+  font-size: 2.1rem;
+  font-weight: 400;
+  flex: 1;
+}
+
+.payment-product-list__header-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-size: 400px;
+  width: 45%;
+}
+
+.payment-product-list__item {
+  margin-top: 12px;
+  padding: 30px;
+  display: flex;
+}
+
+.payment-product-list__item-information {
+  display: flex;
+  flex: 1;
+}
+
+.header-detail__price,
+.header-detail__quantity,
+.header-detail__total-money {
+  align-self: center;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.header-detail__price {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-detail__quantity {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-detail__total-money {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-information__img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+}
+
+.item-information__name {
+  align-self: center;
+  margin-left: 9px;
+  font-size: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 405px;
+}
+
+.item-information__category {
+  align-self: center;
+  margin-left: 9px;
+  font-size: 1.5rem;
+}
+
+.payment-product-list__item-money-calculate {
+  display: flex;
+  width: 45%;
+  justify-content: space-between;
+}
+
+.item-money-calculate__price,
+.item-money-calculate__quantity,
+.item-money-calculate__total-money {
+  align-self: center;
+  font-size: 1.8rem;
+}
+
+.item-money-calculate__price {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-money-calculate__quantity {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-money-calculate__total-money {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment_method {
+  margin: 12px 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.payment_method__header {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+}
+
+
+.btn + .btn {
+  margin-left: 9px;
+}
+
+.payment_method__header-heading {
+  font-size: 2.1rem;
+  font-weight: 400;
+  align-self: center;
+  margin-right: 9px;
+}
+
+.payment_method__header button i {
+  margin-right: 6px;
+}
+
+.payment_method__body {
+  padding: 30px;
+  background-color: hsla(78, 52%, 47%, 0.188);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.payment_method__body-router{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment_method__body-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 4.2rem;
+  margin-right: 21px;
+}
+
+.body-detail__total-cart-money{
+  font-size: 1.8rem;
+  opacity: 0.8;
+}
+
+.body-detail__total-ship-money{
+  font-size: 1.8rem;
+  opacity: 0.8;
+}
+
+.body-detail__total-money{
+  font-size: 2.4rem;
+}
+
+.body-detail__total-money span {
+  font-size: 3rem;
+}
+
+.payment_method__footer{
+  padding: 30px;
+}
+
+.payment_method__footer-msg{
+  font-size: 1.4rem;
+  opacity: 0.6;
+}

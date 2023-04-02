@@ -94,4 +94,10 @@ public class OrderRestController {
         TotalPay totalPay = orderDetailService.getTotal(idOrder);
         return new ResponseEntity<>(totalPay, HttpStatus.OK);
     }
+
+    @PatchMapping("/payment/{idOrder}")
+    public ResponseEntity<Orders> updatePaymentStatus(@PathVariable("idOrder") Integer idOrder){
+        orderDetailService.updatePaymentStatus(idOrder);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

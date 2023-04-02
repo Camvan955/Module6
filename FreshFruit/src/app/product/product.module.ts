@@ -5,9 +5,10 @@ import {ProductRoutingModule} from './product-routing.module';
 import {CartComponent} from './cart/cart.component';
 import {CategoryListComponent} from './category-list/category-list.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
-  declarations: [CartComponent, CategoryListComponent, ProductListComponent],
+  declarations: [CartComponent, CategoryListComponent, ProductListComponent, PaymentComponent],
   imports: [
     CommonModule,
     ProductRoutingModule

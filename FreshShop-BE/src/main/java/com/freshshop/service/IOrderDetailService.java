@@ -22,5 +22,7 @@ public interface IOrderDetailService {
 
     void deleteOrderDetail(Integer idOrder,Integer idProduct);
 
-    TotalPay getTotal(@Param("idOrder") Integer idOrder);
+    TotalPay getTotal(Integer idOrder);
+
+    void updatePaymentStatus(Integer idOrder);
 }

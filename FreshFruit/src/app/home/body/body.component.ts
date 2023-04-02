@@ -43,9 +43,11 @@ export class BodyComponent implements OnInit {
               private orderService: OrderService,
               private title: Title) {
     this.title.setTitle("Trang chủ");
-    this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
-      this.idOrder = next.idOrder;
-    })
+    if(this.tokenStorageService.getToken()){
+      this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
+        this.idOrder = next.idOrder;
+      })
+    }
     this.shareService.getClickEvent().subscribe(next => {
       this.role = this.getRole();
     })
@@ -109,6 +111,7 @@ export class BodyComponent implements OnInit {
   }
 
   addToCart(idProduct: number, nameProduct: string){
+    if(this.tokenStorageService.isLogger()){
     const qty = 1;
     this.orderService.addOrderDetailByIdOrder(this.idOrder, idProduct, qty).subscribe(data =>{
       Swal.fire({
@@ -118,7 +121,15 @@ export class BodyComponent implements OnInit {
               showConfirmButton: false,
               timer: 1000
             })
-    })
+    })}else {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Vui lòng đăng nhập để mua hàng!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
   }
 
   getItem(idProduct: number, nameProduct: string) {

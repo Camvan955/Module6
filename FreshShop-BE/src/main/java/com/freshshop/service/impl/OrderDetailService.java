@@ -55,4 +55,9 @@ public class OrderDetailService implements IOrderDetailService {
         return orderDetailRepository.getTotal(idOrder);
     }
 
+    @Override
+    public void updatePaymentStatus(Integer idOrder) {
+        orderDetailRepository.updatePaymentStatus(idOrder);
+    }
+
 }

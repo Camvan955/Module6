@@ -1,8 +1,6 @@
-export interface Account {
+export interface Customer {
   idAccount: number;
   name: String;
-  password: String;
-  email: String;
   phoneNumber: String;
   address: String;
 }

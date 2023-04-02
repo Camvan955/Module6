@@ -1,57 +1,56 @@
-<div class="row">
-  <nav style="background: white; width: 100%; height: 14%;position: fixed; z-index: 999">
-    <div class="logo" style="margin-left: 50px">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/frushshop.appspot.com/o/logo_nong_san-removebg-preview.png?alt=media&token=4fa905a5-7cff-4478-82bb-a544b8de49c8"
-        height="500" width="500" routerLink="/home"/>
-    </div>
-    <div class="nav-links border-dark">
-      <ul style="margin-left: 200px; size: 30px">
-        <li class="animationTop delay-03" routerLink="/home">TRANG CHỦ</li>
-        <li class="animationTop delay-05" style="margin-left: 25px">GIỚI THIỆU</li>
-        <li class="animationTop delay-06" style="margin-left: 25px" routerLink="/product/category">DANH MỤC SẢN PHẨM</li>
-        <li class="animationTop delay-08" style="margin-left: 25px">LIÊN HỆ</li>
-        <li class="animationTop delay-07" style="margin-left: 25px " routerLink="/product/"
-            *ngIf="role != 'ROLE_ADMIN'">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-               class="bi bi-cart" viewBox="0 1 16 16">
-            <path
-              d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-          </svg>
-        </li>
-        <li class="animationTop delay-10" style="margin-left: 10%">
-          <button *ngIf="!isLoggedIn; else elseBlock" class="btn btn-success" style="width: 100px; height: 35px"
-                  routerLink="/security">Đăng nhập
-          </button>
-          <ng-template #elseBlock>
-            <div>
-              <div class="dropdown animationTop delay-11">
-                <a class="d-flex" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="{{user?.avatar}}" class="rounded-circle"
-                       style="width: 40px; background-image: none; height: 40px"
-                       alt="avc"/>
-                  <strong style="color: #151414; margin-top: 20px; margin-left: 5px" >{{user?.name}}</strong>
-                </a>
-                <ul class="dropdown-menu dropdown-menu bg-success" style="width: 180px">
-                  <li style="color: white">
-                    <i class="fa-solid fa-user me-3"></i><strong>{{user?.username}}</strong>
-                  </li>
-                  <li class="animationTop delay-02"><a class="dropdown"> <i class="fa-solid fa-gear me-1"></i>
-                    Thông tin cá nhân</a></li>
-                  <li class="animationTop delay-03"><a class="dropdown"><i class="fa-sharp fa-solid fa-key me-1"></i>
-                    Sửa mật khẩu</a></li>
-                  <br>
+<nav class="header container-fluid mb-3" style="top: 0; background-color:white;position: sticky; z-index: 999">
+  <div class="logo">
+    <img style="margin-left: 3rem"
+      src="https://firebasestorage.googleapis.com/v0/b/frushshop.appspot.com/o/logo_nong_san-removebg-preview.png?alt=media&token=4fa905a5-7cff-4478-82bb-a544b8de49c8"
+      routerLink="/home"/>
+  </div>
+  <div class="nav-links border-dark">
+    <ul >
+      <li class="animationTop delay-03" routerLink="/home" style="margin-right:40px">TRANG CHỦ</li>
+      <li class="animationTop delay-05" style="margin-right:40px">GIỚI THIỆU</li>
+      <li class="animationTop delay-06" style="margin-right:40px" routerLink="/product/category">SẢN PHẨM</li>
+      <li class="animationTop delay-07" style="margin-right:40px; position: relative" routerLink="/product/"
+          *ngIf="role != 'ROLE_ADMIN'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" style="margin-bottom: 5px" fill="currentColor"
+             class="bi bi-cart" viewBox="0 1 16 16">
+          <path
+            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+        <span *ngIf="quantity>0" style="position: absolute; top: -5px;right: -5px;color: white;background: #f44336;font-weight: bold;padding: 7% 15% 7%;border-radius: 50%;font-size: 13px;opacity: 0.8" >{{quantity}}</span>
+      </li>
+      <li class="animationTop delay-10">
+        <button *ngIf="!isLoggedIn; else elseBlock" class="btn btn-success" style="width: 100px; height: 35px"
+                routerLink="/security">Đăng nhập
+        </button>
+        <ng-template #elseBlock>
+          <div>
+            <div class="dropdown animationTop delay-11">
+              <a type="button " data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{{user?.avatar}}" class="rounded-circle"
+                     style="width: 40px; background-image: none; height: 40px; margin-bottom: 1rem"
+                     alt="avc"/>
+                <b style="color: #454442; margin-left: 10px">{{user?.name}}</b>
+              </a>
+              <ul class="dropdown-menu dropdown-menu bg-success" style="width: 180px">
+                <li style="color: white">
+                  <i class="fa-solid fa-user me-3"></i>
+                  <span>{{user?.username}}</span>
+                </li>
+                <li class="animationTop delay-02"><a class="dropdown"> <i class="fa-solid fa-gear me-1"></i>
+                  Thông tin cá nhân</a></li>
+                <li class="animationTop delay-03"><a class="dropdown"><i class="fa-sharp fa-solid fa-key me-1"></i>
+                  Sửa mật khẩu</a></li>
+                <br>
 
-                  <li class="animationTop delay-04"><a class="dropdown" data-bs-toggle="modal" data-bs-target="#logout"
-                                                       (click)="logout()"
-                                                       type="button"><i
-                    class="fa-sharp fa-solid fa-right-to-bracket me-1"></i> Đăng xuất </a></li>
-                </ul>
-              </div>
+                <li class="animationTop delay-04"><a class="dropdown" data-bs-toggle="modal" data-bs-target="#logout"
+                                                     (click)="logout()"
+                                                     type="button"><i
+                  class="fa-sharp fa-solid fa-right-to-bracket me-1"></i> Đăng xuất </a></li>
+              </ul>
             </div>
-          </ng-template>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</nav>

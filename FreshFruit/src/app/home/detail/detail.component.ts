@@ -82,6 +82,7 @@ export class DetailComponent implements OnInit {
 
 
   addToCart(idProduct: number, nameProduct: string, qty: string){
+    if (this.tokenStorageService.isLogger()){
     this.orderService.addOrderDetailByIdOrder(this.idOrder, idProduct, parseInt(qty)).subscribe(data =>{
       Swal.fire({
         position: 'center',
@@ -91,5 +92,14 @@ export class DetailComponent implements OnInit {
         timer: 1000
       })
     })
+  } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Vui lòng đăng nhập để mua hàng!',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
   }
 }

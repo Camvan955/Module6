@@ -11,7 +11,7 @@ import {Category} from "../entity/category";
 })
 export class ProductService {
 
-  URL_PRODUCT = 'http://localhost:8080/product'
+  URL_PRODUCT = 'http://localhost:8080/product';
 
   constructor(private httpClient: HttpClient,
               private tokenStorageService: TokenStorageService) {
@@ -40,4 +40,5 @@ export class ProductService {
   getProductListByCategory(idCategory: number, size: number): Observable<any> {
     return this.httpClient.get<any>(this.URL_PRODUCT +'/by-id' + '?' + 'size=' + size + "&id=" + idCategory);
   }
+
 }

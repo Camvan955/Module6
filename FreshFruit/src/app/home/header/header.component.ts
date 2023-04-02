@@ -4,6 +4,7 @@ import {SecurityService} from "../../service/authentication/security.service";
 import {Router} from "@angular/router";
 import {ShareService} from "../../service/authentication/share.service";
 import Swal from "sweetalert2";
+import {OrderService} from "../../service/order/order.service";
 
 @Component({
   selector: 'app-header',
@@ -14,19 +15,28 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   user: any;
   username = ''
-  name= '';
+  name = '';
   role: string = "";
+  quantity = 0;
+  idOrder = 0;
 
   constructor(private tokenStorageService: TokenStorageService,
               private securityService: SecurityService,
               private router: Router,
-              private shareService: ShareService) {
+              private shareService: ShareService,
+              private orderService: OrderService) {
     this.securityService.getIsLoggedIn().subscribe(next => {
       this.isLoggedIn = next;
     });
     this.securityService.getUserLoggedIn().subscribe(next => {
       this.user = next;
     });
+    this.shareService.getClickEvent().subscribe(next => {
+      this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
+        this.idOrder = next.idOrder;
+        this.getTotalPay(this.idOrder);
+      })
+    })
   }
 
   getRole() {
@@ -40,6 +50,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.shareService.getClickEvent().subscribe(next => {
       this.role = this.getRole();
+    })
+    this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
+      this.idOrder = next.idOrder;
+      this.getTotalPay(this.idOrder);
     })
   }
 
@@ -56,4 +70,13 @@ export class HeaderComponent implements OnInit {
       timer: 1500
     })
   }
+
+  getTotalPay(idOrder: number) {
+    this.orderService.getTotalPay(idOrder).subscribe(data => {
+      if (data) {
+        this.quantity = data.totalQuantity;
+      }
+    })
+  }
+
 }

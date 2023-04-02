@@ -3,12 +3,18 @@
   padding: 0;
 }
 
+.header{
+  box-shadow: 0 0 20px 0 #253365;
+  min-height: 15vh;
+  height: 20vh;
+  width: 100%;
+}
+
 nav {
   display: flex;
   padding: 1% 1%;
   justify-content: space-between;
   align-items: center;
-
 }
 
 nav img {
@@ -17,9 +23,10 @@ nav img {
 }
 
 .nav-links {
-  /*color: green;*/
-  flex: 1;
-  /*text-align: right;*/
+  color: #2d2b2b;
+  /*flex: 1;*/
+  margin-right: 5rem;
+  text-align: right;
 
 }
 
@@ -27,7 +34,6 @@ nav img {
   list-style: none;
   display: inline-block;
   padding: 8px 12px;
-  position: relative;
 }
 
 .nav-links ul li a {
@@ -89,6 +95,10 @@ nav .fa {
 }
 
 @media (max-width: 700px) {
+  .header{
+    height: 45vh;
+  }
+
   .text-box h1 {
     font-size: 20px;
   }
@@ -333,87 +343,6 @@ nav .fa {
 
 @media (max-width: 1200px) {
   /* tablet devices */
-}
-
-@media (max-width: 992px) {
-  /* small tablet devices */
-  .slider-main .item-slide {
-    height: auto;
-  }
-
-  .table-shopping-cart tr td:first-child {
-    width: 250px;
-  }
-
-  .table-shopping-cart .itemside .info {
-    padding: 0;
-  }
-
-  .table-shopping-cart .itemside .aside {
-    display: none;
-  }
-}
-
-@media all and (max-width: 768px) {
-  /* mobile devices */
-  .mobile-block {
-    display: block;
-  }
-
-  .mobile-hide {
-    display: none;
-  }
-
-  .section-header .logo {
-    max-height: 40px;
-    width: auto;
-  }
-
-  .section-header .header-main .brand-wrap {
-    margin-bottom: 1rem;
-    display: inline-block;
-  }
-
-  .section-header .header-main .search {
-    margin-bottom: 1rem;
-  }
-
-  .item-feature {
-    margin-bottom: 20px;
-  }
-
-  .mobile-order-first {
-    order: -1;
-  }
-
-  .mobile-order-1 {
-    order: 1;
-  }
-
-  .mobile-order-2 {
-    order: 2;
-  }
-
-  .mobile-order-3 {
-    order: 3;
-  }
-
-  .mobile-py {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-
-  .mobile-pb {
-    padding-bottom: 20px;
-  }
-
-  .mobile-pt {
-    padding-top: 20px;
-  }
-
-  .navbar-expand .navbar-collapse {
-    flex-direction: column;
-  }
 }
 
 .dropdown {
