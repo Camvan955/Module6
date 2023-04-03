@@ -49,7 +49,6 @@ export class OrderService {
   }
 
   updatePaymentStatus(idOrder: number){
-    // @ts-ignore
-    return this.httpClient.patch(this.URL_PRODUCT+'/payment/'+ idOrder);
+    return this.httpClient.patch(this.URL_ORDER + '/payment',  {idOrder: idOrder, dateOrder: new Date().toLocaleString()});
   }
 }

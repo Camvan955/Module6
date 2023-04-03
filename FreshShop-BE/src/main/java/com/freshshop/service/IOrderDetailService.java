@@ -1,6 +1,7 @@
 package com.freshshop.service;
 
 import com.freshshop.dto.order.OrderDetailDto;
+import com.freshshop.dto.order.PaymentDto;
 import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
 import org.springframework.data.repository.query.Param;
@@ -24,5 +25,5 @@ public interface IOrderDetailService {
 
     TotalPay getTotal(Integer idOrder);
 
-    void updatePaymentStatus(Integer idOrder);
+    void updatePaymentStatus(Integer idOrder, String dateOrder);
 }

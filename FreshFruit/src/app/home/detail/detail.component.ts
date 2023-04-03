@@ -43,47 +43,10 @@ export class DetailComponent implements OnInit {
     window.scroll(0, 0);
   }
 
-  // addToCard(item: Product) {
-  //   if (this.tokenStorageService.getCart()) {
-  //     this.cartList = this.tokenStorageService.getCart();
-  //     if (item.idProduct != null) {
-  //       this.cartt.idProduct = item.idProduct;
-  //     }
-  //     this.cartt.nameProduct = item.nameProduct;
-  //     this.cartt.image = item.image;
-  //     this.cartt.price = item.price;
-  //     if (this.tokenStorageService.checkExistId(item.idProduct)) {
-  //       this.tokenStorageService.upQuantityProduct(item.idProduct, this.cartList);
-  //     } else {
-  //       this.cartt.quantity = 1;
-  //       this.cartList.push(this.cartt);
-  //     }
-  //     this.tokenStorageService.setCart(this.cartList);
-  //     Swal.fire({
-  //       position: 'center',
-  //       icon: 'success',
-  //       title: 'Đã thêm sản phẩm vào giỏ hàng!',
-  //       showConfirmButton: false,
-  //       timer: 1500
-  //     })
-  //   } else {
-  //     if (item.idProduct != null) {
-  //       this.cartt.idProduct = item.idProduct;
-  //     }
-  //     this.cartt.nameProduct = item.nameProduct;
-  //     this.cartt.image = item.image;
-  //     this.cartt.price = item.price;
-  //     this.cartt.quantity = 1;
-  //     this.cartList.push(this.cartt);
-  //     this.tokenStorageService.setCart(this.cartList);
-  //     alert('Đã thêm sản phẩm ' + this.cartt.nameProduct + ' vào giỏ hàng.');
-  //   }
-  // }
-
-
   addToCart(idProduct: number, nameProduct: string, qty: string){
     if (this.tokenStorageService.isLogger()){
     this.orderService.addOrderDetailByIdOrder(this.idOrder, idProduct, parseInt(qty)).subscribe(data =>{
+      this.shareService.sendClickEvent();
       Swal.fire({
         position: 'center',
         icon: 'success',

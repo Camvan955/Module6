@@ -40,8 +40,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.formGroup.valid) {
-      this.securityService.login(this.formGroup.value).subscribe(
-        data => {
+      this.securityService.login(this.formGroup.value).subscribe(data => {
           if (this.formGroup.value.rememberMe) {
             this.tokenStorageService.saveTokenLocal(data.token);
             this.tokenStorageService.saveUserLocal(data, data.email, data.idAccount, data.username, data.name, data.roles, data.avatar);
@@ -51,14 +50,13 @@ export class LoginComponent implements OnInit {
           }
           const user = this.tokenStorageService.getUser();
           this.securityService.setIsLoggedIn(user, true);
-          this.shareService.sendClickEvent();
           const id = this.tokenStorageService.getIdAccount();
           this.roles = this.tokenStorageService.getRole();
-          console.log(this.roles[0], 'this.roles[0]')
-          if (this.roles[0] != 'ROLE_ADMIN'){
+          this.shareService.sendClickEvent();
+          if (this.roles[0] != 'ROLE_ADMIN') {
             this.orderService.addOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe();
           }
-            this.router.navigateByUrl('home');
+          this.router.navigateByUrl('home');
           this.formGroup.reset();
           Swal.fire({
             position: 'center',

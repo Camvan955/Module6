@@ -3,7 +3,6 @@ package com.freshshop.repository;
 import com.freshshop.dto.order.OrderDetailDto;
 import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -35,7 +34,6 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
                     "where payment_status= false and a.id_account= :idAccount", nativeQuery = true)
     List<OrderDetailDto> getOrderDetail(@Param("idAccount") Long idAccount);
 
-
     @Query(value = "select `fresh_shopp`.`order_detail`.id_product as idProduct,p.name_product as nameProduct, p.price, order_detail.quantity, p.image\n" +
             "from `fresh_shopp`.order_detail\n" +
             "join `fresh_shopp`.product p on p.id_product = order_detail.id_product\n" +
@@ -64,7 +62,8 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
     TotalPay getTotal(@Param("idOrder") Integer idOrder);
 
     @Modifying
-    @Query(value = "update `fresh_shopp`.`orders` set payment_status = true where id_order=:idOrder", nativeQuery = true)
-    void updatePaymentStatus(@Param("idOrder") Integer idOrder);
+    @Query(value = "update `fresh_shopp`.`orders` set payment_status = true, date_order = :dateOrder where id_order=:idOrder", nativeQuery = true)
+    void updatePaymentStatus(@Param("idOrder") Integer idOrder, @Param("dateOrder") String dateOrder);
+
 
 }

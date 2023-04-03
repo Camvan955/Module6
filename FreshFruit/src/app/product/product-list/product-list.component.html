@@ -1,6 +1,7 @@
 <div class="packages" style="background-color:beige" >
   <div class="container">
     <div>
+      <h1 style="text-align: center; padding-top: 20px">DANH SÁCH SẢN PHẨM</h1>
       <div class="packages-content">
         <div class="row">
           <div class="col-4 col-md-4 col-sm-6 filtr-container" *ngFor="let item of pageProduct">
@@ -20,7 +21,7 @@
                      alt="package-place"/>
               </a>
 
-              <div class="single-package-item-txt">
+              <div class="single-package-item-txt" style="text-align: center">
                 <h4 class="mt-3">{{item.nameProduct}}</h4>
                 <p>Giá: <span> {{item.price | number }}đ</span></p>
                 <div class="btn" *ngIf="role != 'ROLE_ADMIN'">

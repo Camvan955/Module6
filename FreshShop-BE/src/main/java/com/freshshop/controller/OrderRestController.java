@@ -1,9 +1,6 @@
 package com.freshshop.controller;
 
-import com.freshshop.dto.order.OrderDetailDto;
-import com.freshshop.dto.order.OrdersDetailAdd;
-import com.freshshop.dto.order.OrdersDto;
-import com.freshshop.dto.order.TotalPay;
+import com.freshshop.dto.order.*;
 import com.freshshop.entity.order.OrderDetail;
 import com.freshshop.entity.order.Orders;
 import com.freshshop.service.impl.OrderDetailService;
@@ -95,9 +92,9 @@ public class OrderRestController {
         return new ResponseEntity<>(totalPay, HttpStatus.OK);
     }
 
-    @PatchMapping("/payment/{idOrder}")
-    public ResponseEntity<Orders> updatePaymentStatus(@PathVariable("idOrder") Integer idOrder){
-        orderDetailService.updatePaymentStatus(idOrder);
+    @PatchMapping("/payment")
+    public ResponseEntity<?> updatePaymentStatus(@RequestBody OrdersDetailAdd ordersDetailAdd){
+       orderDetailService.updatePaymentStatus(ordersDetailAdd.getIdOrder(), ordersDetailAdd.getDateOrder());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

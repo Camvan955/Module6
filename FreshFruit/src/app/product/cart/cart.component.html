@@ -30,7 +30,7 @@
                           <h6 class="mb-0 mt-3">{{item.nameProduct}}</h6>
                         </div>
 
-                        <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
+                        <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center">
                           <input id="form" name="quantity" [value]="item.quantity"
                                  class="form-control form-control-md" style="width: 50px" readonly/>
                         </div>
@@ -40,27 +40,28 @@
                         </div>
 
                         <div class="col-md-2 col-lg-2 col-xl-2">
-                          <h6 class=" mb-0">{{item.price*item.quantity | number}}đ</h6>
+                          <h6 class=" mb-0">{{item.price * item.quantity | number}}đ</h6>
                         </div>
 
                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                          <a class="text-muted" (click)="removeOrderDetail(idOrder, item.idProduct)">
-                            <i class="fa-solid fa-trash"></i>
+                          <a class="text-danger" (click)="removeOrderDetail(idOrder, item.idProduct)">
+                           <i class="fas fa-trash fa-lg"></i>
                           </a>
                         </div>
                       </div>
-                        <hr class="my-4">
-                      <h6 class="mb-0 text-muted" style="margin-left: 83%"><span>Tổng: </span>{{cart.length}}<span> mặt hàng</span></h6>
-                      <button class="btn btn-success" style="margin-left: 45%; margin-top: 5%" routerLink="/home">Mua thêm</button>
+                      <hr class="my-4">
+                      <h6 class="mb-0 text-muted" style="margin-left: 83%"><span>Tổng: </span>{{cart.length}}<span> mặt hàng</span>
+                      </h6>
+                      <button class="btn btn-success" style="margin-left: 45%; margin-top: 5%" routerLink="/home">Mua
+                        thêm
+                      </button>
                     </div>
                   </div>
                   <ng-template #elseBlock>
-                    <div style="margin-left: 30%; margin-top: 20%">
+                    <div class="text-center m-5">
                       <img src="../../../assets/images/gio hang trong.png" height="210" width="300"/>
                     </div>
-                    <button class="btn btn-success" style="margin-left: 42%; margin-top: 3%" routerLink="/home">Quay
-                      lại
-                    </button>
+                    <button class="btn btn-success" style="margin-left: 42%; margin-top: 3%" routerLink="/home">Quay lại</button>
                   </ng-template>
                 </div>
                 <div class="col-lg-4 bg-grey">
@@ -69,27 +70,31 @@
                     <hr class="my-4">
                     <table>
                       <tr>
-                        <th>Khách hàng: </th>
+                        <th>Khách hàng:</th>
                         <td style="text-align: right">{{nameCustomer}}</td>
                       </tr>
                       <tr>
-                        <th>Giao tới:</th>
+                        <th>Địa chỉ:</th>
                         <td>{{address}}</td>
                       </tr>
                       <tr>
                         <th>Số điện thoại:</th>
                         <td style="text-align: right">{{phoneNumber}}</td>
                       </tr>
+                      <tr>
+                        <th>Email:</th>
+                        <td style="text-align: right">{{email}}</td>
+                      </tr>
                     </table>
 
                     <hr class="my-4">
 
                     <div class="justify-content-between mt-3 mb-3">
-                      <h5 class="mt-3 text-end">Tổng tiền: {{total | number}} đ</h5>
+                      <h6 class="mt-3">Tổng tiền: {{total | number}} đ</h6>
                     </div>
 
                     <a type="button" class="btn btn-primary btn-md mt-3" style="margin-left: 30%"
-                            data-mdb-ripple-color="primary" routerLink="/product/payment">Mua hàng ({{quantity}})
+                       data-mdb-ripple-color="primary" routerLink="/product/payment"> Mua hàng ({{quantity}})
                     </a>
                   </div>
                 </div>
@@ -101,3 +106,4 @@
     </div>
   </section>
 </div>
+

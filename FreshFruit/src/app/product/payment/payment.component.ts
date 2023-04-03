@@ -6,7 +6,8 @@ import {ShareService} from "../../service/authentication/share.service";
 import {Title} from "@angular/platform-browser";
 import {TokenStorageService} from "../../service/authentication/token-storage.service";
 import {Router} from "@angular/router";
-import {Cart} from "../../entity/cart";
+import {Orders} from "../../entity/orders";
+import {SecurityService} from "../../service/authentication/security.service";
 
 @Component({
   selector: 'app-payment',
@@ -16,65 +17,95 @@ import {Cart} from "../../entity/cart";
 export class PaymentComponent implements OnInit {
   idOrder = 0;
   idAccount = 0;
-  cart: Cart[] = [];
+  // @ts-ignore
+  order: Orders = {idOrder: 0};
+  money = 0;
+  totalPrice = 0;
+  roles: string[] = [];
+  nameCustomer: String = "";
+  address: String = "";
+  phoneNumber: String = "";
+  email: String = "";
 
   constructor(private orderService: OrderService,
               private shareService: ShareService,
               private tokenStorageService: TokenStorageService,
               private router: Router,
-              private title: Title) {
+              private title: Title,
+              private securityService: SecurityService) {
     this.title.setTitle("Thanh toán");
+    this.idAccount = parseInt(this.tokenStorageService.getIdAccount());
     this.shareService.getClickEvent().subscribe(next => {
       this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
         this.idOrder = next.idOrder;
       })
     })
-    render(
-      {
-        id: '#myPaypalButtons',
-        currency: 'USD',
-        value: '100.00',
-        onApprove: (details => {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Mua hàng thành công!',
-            showConfirmButton: false,
-            timer: 1000
-          })
-          this.paymentCart();
-        })
-      })
   }
 
   ngOnInit(): void {
     window.scroll(0, 0);
-    this.getAllCart(this.idAccount);
+    this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
+      console.log(this.idAccount+ "nè")
+      this.idOrder = next.idOrder;
+      this.getPayment(this.idOrder);
+      console.log(this.idAccount+ "nè")
+      this.getInfoCustomer(this.idAccount);
+    })
+    this.roles = this.tokenStorageService.getRole();
   }
 
-  paymentCart() {
-    this.orderService.updatePaymentStatus(this.idOrder).subscribe(() => {
-      Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Mua hàng thành công!',
-          showConfirmButton: false,
-          timer: 1000
+  getPayment(order: number) {
+      this.orderService.getTotalPay(order).subscribe(data => {
+        if (data) {
+          this.totalPrice = data.totalPay;
+          this.money = +(this.totalPrice / 23000).toFixed(2);
+          this.paymentPaypal(this.money.toString());
         }
-      );
-      this.ngOnInit();
-      this.clear();
+      })
+  }
+
+  paymentPaypal(money: string) {
+    render(
+      {
+        id: '#myPaypalButtons',
+        currency: 'USD',
+        value: money,
+        onApprove: (details => {
+          this.orderService.updatePaymentStatus(this.idOrder).subscribe(data => {
+            if (this.roles[0] != 'ROLE_ADMIN'){
+              this.orderService.addOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(
+                next => {
+                  this.shareService.sendClickEvent();
+                }
+              );
+            }
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Mua hàng thành công!',
+                showConfirmButton: false,
+                timer: 1500
+              });
+            this.router.navigateByUrl('/home');
+            }
+          )
+        })
+      })
+  }
+
+  getInfoCustomer(idAccount: number) {
+    this.securityService.getInfoCustomer(idAccount).subscribe(data => {
+      console.log(data, "infoo")
+      if (data) {
+        // @ts-ignore
+        this.account = data;
+        // @ts-ignore
+        this.nameCustomer = data.name;
+        this.address = data.address;
+        this.phoneNumber = data.phoneNumber;
+        this.email= data.email;
+      }
     })
   }
 
-  getAllCart(idAccount: number) {
-    this.orderService.getOrderDetailByIdAccount(idAccount).subscribe(data => {
-      // @ts-ignore
-      this.cart = data;
-    })
-  }
-
-  clear() {
-    this.cart = [];
-  }
 }

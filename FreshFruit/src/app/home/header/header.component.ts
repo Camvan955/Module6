@@ -25,6 +25,9 @@ export class HeaderComponent implements OnInit {
               private router: Router,
               private shareService: ShareService,
               private orderService: OrderService) {
+    this.shareService.getClickEvent().subscribe(next => {
+      this.role = this.getRole();
+    })
     this.securityService.getIsLoggedIn().subscribe(next => {
       this.isLoggedIn = next;
     });
@@ -33,8 +36,9 @@ export class HeaderComponent implements OnInit {
     });
     this.shareService.getClickEvent().subscribe(next => {
       this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
+        // this.getTotalPay(this.idOrder);
         this.idOrder = next.idOrder;
-        this.getTotalPay(this.idOrder);
+        this.quantity = this.getTotalPay(this.idOrder);
       })
     })
   }
@@ -48,12 +52,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.shareService.getClickEvent().subscribe(next => {
-      this.role = this.getRole();
-    })
+    this.role = this.getRole();
     this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
       this.idOrder = next.idOrder;
-      this.getTotalPay(this.idOrder);
+      // this.getTotalPay(this.idOrder);
+      this.quantity = this.getTotalPay(this.idOrder);
     })
   }
 
@@ -61,6 +64,7 @@ export class HeaderComponent implements OnInit {
     this.tokenStorageService.logout();
     this.securityService.setIsLoggedIn(null, false);
     this.router.navigateByUrl('home');
+    this.quantity = 0;
     this.shareService.sendClickEvent();
     Swal.fire({
       position: 'center',
@@ -77,6 +81,7 @@ export class HeaderComponent implements OnInit {
         this.quantity = data.totalQuantity;
       }
     })
+    return this.quantity;
   }
 
 }

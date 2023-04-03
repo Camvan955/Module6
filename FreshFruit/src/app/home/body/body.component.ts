@@ -114,6 +114,7 @@ export class BodyComponent implements OnInit {
     if(this.tokenStorageService.isLogger()){
     const qty = 1;
     this.orderService.addOrderDetailByIdOrder(this.idOrder, idProduct, qty).subscribe(data =>{
+      this.shareService.sendClickEvent();
       Swal.fire({
               position: 'center',
               icon: 'success',

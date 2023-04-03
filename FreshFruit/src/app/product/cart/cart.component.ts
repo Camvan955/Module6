@@ -21,10 +21,11 @@ export class CartComponent implements OnInit {
   idOrder = 0;
   role: String = "";
   quantity = 0;
-  account: Account[]=[];
-  nameCustomer: string = "";
+  account: Account[] = [];
+  nameCustomer: String = "";
   address: String = "";
   phoneNumber: String = "";
+  email: String = "";
   constructor(private tokenStorageService: TokenStorageService,
               private router: Router,
               private title: Title,
@@ -37,6 +38,7 @@ export class CartComponent implements OnInit {
       this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
         this.idOrder = next.idOrder;
         this.getTotalPay(this.idOrder);
+
       })
       this.getAllCart(this.idAccount);
       this.role = this.getRole();
@@ -62,7 +64,6 @@ export class CartComponent implements OnInit {
     this.orderService.getOrderDetailByIdAccount(idAccount).subscribe(data => {
       // @ts-ignore
       this.cart = data;
-      console.log(data, "nè")
       this.getInfoCustomer(idAccount);
     })
   }
@@ -74,17 +75,18 @@ export class CartComponent implements OnInit {
         this.quantity = data.totalQuantity;
       }
     })
+    return this.quantity;
   }
 
   getInfoCustomer(idAccount: number) {
     this.securityService.getInfoCustomer(idAccount).subscribe(data => {
-      if (data){
-       // @ts-ignore
-        this.account = data;
+      if (data) {
         // @ts-ignore
-        this.nameCustomer=data.name;
-        this.address=data.address;
-        this.phoneNumber=data.phoneNumber;
+        this.account = data;
+        this.nameCustomer = data.name;
+        this.address = data.address;
+        this.phoneNumber = data.phoneNumber;
+        this.email= data.email;
       }
     })
   }

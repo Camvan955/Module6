@@ -1,6 +1,7 @@
 package com.freshshop.service.impl;
 
 import com.freshshop.dto.order.OrderDetailDto;
+import com.freshshop.dto.order.PaymentDto;
 import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
 import com.freshshop.entity.order.Orders;
@@ -56,8 +57,8 @@ public class OrderDetailService implements IOrderDetailService {
     }
 
     @Override
-    public void updatePaymentStatus(Integer idOrder) {
-        orderDetailRepository.updatePaymentStatus(idOrder);
+    public void updatePaymentStatus(Integer idOrder, String dateOrder) {
+        orderDetailRepository.updatePaymentStatus(idOrder, dateOrder);
     }
 
 }
