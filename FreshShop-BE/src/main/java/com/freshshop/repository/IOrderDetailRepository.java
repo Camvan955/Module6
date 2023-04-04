@@ -1,8 +1,12 @@
 package com.freshshop.repository;
 
 import com.freshshop.dto.order.OrderDetailDto;
+import com.freshshop.dto.order.PurchaseHistoryView;
 import com.freshshop.dto.order.TotalPay;
+import com.freshshop.dto.product.ProductView;
 import com.freshshop.entity.order.OrderDetail;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -65,5 +69,16 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
     @Query(value = "update `fresh_shopp`.`orders` set payment_status = true, date_order = :dateOrder where id_order=:idOrder", nativeQuery = true)
     void updatePaymentStatus(@Param("idOrder") Integer idOrder, @Param("dateOrder") String dateOrder);
 
-
+    @Query(value = "select p.name_product as nameProduct, " +
+            "od.quantity, " +
+            "`orders`.date_order as dateOrder, " +
+            "SUM(od.quantity* p.price) as total, " +
+            "price " +
+            "from `fresh_shopp`.`orders` " +
+            "join `fresh_shopp`.`product` p on orders.flag_delete = p.flag_delete " +
+            "join `fresh_shopp`.`order_detail` od on p.id_product = od.id_product " +
+            "where payment_status = true and id_account= :idAccount " +
+            "group by name_product, date_order " +
+            "order by date_order desc", nativeQuery = true)
+    Page<PurchaseHistoryView> pagePurchase(@Param("idAccount") Long idAccount,Pageable pageable);
 }

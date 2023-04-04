@@ -6,6 +6,9 @@ import com.freshshop.entity.order.Orders;
 import com.freshshop.service.impl.OrderDetailService;
 import com.freshshop.service.impl.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,7 +75,7 @@ public class OrderRestController {
         List<OrderDetailDto> list = orderDetailService.getOrderDetailByIdOrder(ordersDetailAdd.getIdOrder());
         for (OrderDetailDto o : list) {
             if (o.getIdProduct().equals(ordersDetailAdd.getIdProduct())) {
-                    orderDetailService.updateQuantity(ordersDetailAdd.getIdOrder(), ordersDetailAdd.getIdProduct(), ordersDetailAdd.getQuantity() + o.getQuantity());
+                orderDetailService.updateQuantity(ordersDetailAdd.getIdOrder(), ordersDetailAdd.getIdProduct(), ordersDetailAdd.getQuantity() + o.getQuantity());
                 return new ResponseEntity<>(HttpStatus.OK);
             }
         }
@@ -81,20 +84,31 @@ public class OrderRestController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> removeOrderDetail(@RequestParam Integer idOrder,@RequestParam Integer idProduct){
+    public ResponseEntity<?> removeOrderDetail(@RequestParam Integer idOrder, @RequestParam Integer idProduct) {
         orderDetailService.deleteOrderDetail(idOrder, idProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/total-pay/{idOrder}")
-    public ResponseEntity<TotalPay> getTotalByIdOrder(@PathVariable("idOrder") Integer idOrder){
+    public ResponseEntity<TotalPay> getTotalByIdOrder(@PathVariable("idOrder") Integer idOrder) {
         TotalPay totalPay = orderDetailService.getTotal(idOrder);
         return new ResponseEntity<>(totalPay, HttpStatus.OK);
     }
 
     @PatchMapping("/payment")
-    public ResponseEntity<?> updatePaymentStatus(@RequestBody OrdersDetailAdd ordersDetailAdd){
-       orderDetailService.updatePaymentStatus(ordersDetailAdd.getIdOrder(), ordersDetailAdd.getDateOrder());
+    public ResponseEntity<?> updatePaymentStatus(@RequestBody OrdersDetailAdd ordersDetailAdd) {
+        orderDetailService.updatePaymentStatus(ordersDetailAdd.getIdOrder(), ordersDetailAdd.getDateOrder());
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/purchase-history/{idAccount}")
+    public ResponseEntity<Page<PurchaseHistoryView>> getPurchasePage(@PathVariable Long idAccount,
+                                                                     @PageableDefault(size = 5) Pageable pageable) {
+        Page<PurchaseHistoryView> purchasePage;
+        purchasePage= orderDetailService.pagePurchase(idAccount, pageable);
+        if (purchasePage.isEmpty()){
+            return new ResponseEntity<>(purchasePage, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(purchasePage, HttpStatus.OK);
     }
 }

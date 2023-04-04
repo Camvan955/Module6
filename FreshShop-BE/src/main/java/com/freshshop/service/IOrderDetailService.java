@@ -2,8 +2,11 @@ package com.freshshop.service;
 
 import com.freshshop.dto.order.OrderDetailDto;
 import com.freshshop.dto.order.PaymentDto;
+import com.freshshop.dto.order.PurchaseHistoryView;
 import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -26,4 +29,6 @@ public interface IOrderDetailService {
     TotalPay getTotal(Integer idOrder);
 
     void updatePaymentStatus(Integer idOrder, String dateOrder);
+
+    Page<PurchaseHistoryView> pagePurchase(Long idAccount, Pageable pageable);
 }

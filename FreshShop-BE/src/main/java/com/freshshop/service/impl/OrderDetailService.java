@@ -2,6 +2,7 @@ package com.freshshop.service.impl;
 
 import com.freshshop.dto.order.OrderDetailDto;
 import com.freshshop.dto.order.PaymentDto;
+import com.freshshop.dto.order.PurchaseHistoryView;
 import com.freshshop.dto.order.TotalPay;
 import com.freshshop.entity.order.OrderDetail;
 import com.freshshop.entity.order.Orders;
@@ -9,6 +10,8 @@ import com.freshshop.repository.IOrderDetailRepository;
 import com.freshshop.service.IOrderDetailService;
 import com.freshshop.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,6 +62,11 @@ public class OrderDetailService implements IOrderDetailService {
     @Override
     public void updatePaymentStatus(Integer idOrder, String dateOrder) {
         orderDetailRepository.updatePaymentStatus(idOrder, dateOrder);
+    }
+
+    @Override
+    public Page<PurchaseHistoryView> pagePurchase(Long idAccount, Pageable pageable) {
+        return orderDetailRepository.pagePurchase(idAccount, pageable);
     }
 
 }
