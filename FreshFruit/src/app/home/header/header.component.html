@@ -1,11 +1,11 @@
 <nav class="header container-fluid mb-3" style="top: 0; background-color:white;position: sticky; z-index: 999">
   <div class="logo">
     <img style="margin-left: 3rem"
-      src="https://firebasestorage.googleapis.com/v0/b/frushshop.appspot.com/o/logo_nong_san-removebg-preview.png?alt=media&token=4fa905a5-7cff-4478-82bb-a544b8de49c8"
-      routerLink="/home"/>
+         src="https://firebasestorage.googleapis.com/v0/b/frushshop.appspot.com/o/logo_nong_san-removebg-preview.png?alt=media&token=4fa905a5-7cff-4478-82bb-a544b8de49c8"
+         routerLink="/home"/>
   </div>
   <div class="nav-links border-dark">
-    <ul >
+    <ul>
       <li class="animationTop delay-03" routerLink="/home" style="margin-right:40px">TRANG CHỦ</li>
       <li class="animationTop delay-05" style="margin-right:40px">GIỚI THIỆU</li>
       <li class="animationTop delay-06" style="margin-right:40px" routerLink="/product/category">SẢN PHẨM</li>
@@ -16,7 +16,8 @@
           <path
             d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
         </svg>
-        <span *ngIf="quantity>0" style="position: absolute; top: -5px;right: -5px;color: white;background: #f44336;font-weight: bold;padding: 7% 15% 7%;border-radius: 50%;font-size: 13px;opacity: 0.8" >{{quantity}}</span>
+        <span *ngIf="quantity>0"
+              style="position: absolute; top: -5px;right: -5px;color: white;background: #f44336;font-weight: bold;padding: 7% 15% 7%;border-radius: 50%;font-size: 13px;opacity: 0.8">{{quantity}}</span>
       </li>
       <li class="animationTop delay-10">
         <button *ngIf="!isLoggedIn; else elseBlock" class="btn btn-success" style="width: 100px; height: 35px"
@@ -38,6 +39,19 @@
                 </li>
                 <li class="animationTop delay-02"><a class="dropdown"> <i class="fa-solid fa-gear me-1"></i>
                   Thông tin cá nhân</a></li>
+                <li class="animationTop delay-02">
+                  <a class="dropdown" routerLink="/product/purchase-history">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-journal-check me-1" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd"
+                            d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                      <path
+                        d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                      <path
+                        d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                    </svg>
+                    Lịch sử mua hàng</a>
+                </li>
                 <li class="animationTop delay-03"><a class="dropdown"><i class="fa-sharp fa-solid fa-key me-1"></i>
                   Sửa mật khẩu</a></li>
                 <br>

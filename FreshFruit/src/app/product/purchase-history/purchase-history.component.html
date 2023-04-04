@@ -1,0 +1,103 @@
+<body style=" height: 100vh; margin-top: 50px">
+<div style="position: relative">
+  <div class="justify-content-center">
+    <div>
+      <div>
+        <h1 class="text-uppercase" style="size:32px; margin-bottom: 2rem; padding-top: 1rem; text-align: center">Lịch sử mua hàng</h1>
+      </div>
+      <div>
+        <div class="col-1"></div>
+        <div class="col-10 container-fluid">
+          <button class="btn btn-success" style="margin-bottom: 1rem; text-align: right"
+                  routerLink="/home"> Quay lại trang chủ
+          </button>
+          <table class="table table-bordered table-hover table-striped" style="text-align: center;  box-shadow: 0 0 20px 0 #253365">
+            <thead class="table-primary">
+            <tr>
+              <th scope="col" >STT</th>
+              <th scope="col" >Tên mặt hàng</th>
+              <th scope="col">Số lượng</th>
+              <th scope="col" >Ngày đặt hàng</th>
+              <th scope="col">Thành tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of purchaseList?.content; let i = index">
+              <td>{{(i + 1)}}</td>
+              <td style="text-align: left"><span style="margin-left: 2rem">{{item.nameProduct}}</span></td>
+              <td>{{item.quantity}}</td>
+              <td>{{item.dateOrder}}</td>
+              <td>{{item.total| number}} đ</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: absolute; top: 420px; left: 50%" *ngIf="purchaseList">
+    <div *ngIf="purchaseList?.content?.length != 0; else elseBlockPagination" style="float: right">
+      <div *ngIf="purchaseList" class="d-flex justify-content-center" id="last-row">
+        <div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item" [ngClass]="purchaseList.first ? 'disabled': ''">
+                <a role="button" class="page-link" (click)="changePage(0)">Trang đầu</a>
+              </li>
+              <li class="page-item" [ngClass]="purchaseList.first ? 'disabled': ''">
+                <a role="button" class="page-link" (click)="changePage(purchaseList.number - 1)"><</a>
+              </li>
+              <li class="page-item" *ngIf="purchaseList.number - 3 > 0">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number - 4)">{{purchaseList.number - 3}}</a>
+              </li>
+              <li class="page-item" *ngIf="purchaseList.number - 2 > 0">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number - 3)">{{purchaseList.number - 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="purchaseList.number - 1 > 0">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number - 2)">{{purchaseList.number - 1}}</a>
+              </li>
+              <li class="page-item" *ngIf="purchaseList.number > 0">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number - 1)">{{purchaseList.number}}</a>
+              </li>
+              <li class="page-item active"><a class="page-link">{{purchaseList.number + 1}}</a></li>
+              <li class="page-item" *ngIf="purchaseList.number + 2 <= purchaseList.totalPages">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number + 1)">{{purchaseList.number + 2}}</a>
+              </li>
+              <li class="page-item" *ngIf="purchaseList.number + 3 <= purchaseList.totalPages">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number + 2)">{{purchaseList.number + 3}}</a>
+              </li>
+              <li class="page-item" *ngIf="purchaseList.number + 4 <= purchaseList.totalPages">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number + 3)">{{purchaseList.number + 4}}</a>
+              </li>
+              <li class="page-item" *ngIf="purchaseList.number + 5 <= purchaseList.totalPages">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number + 4)">{{purchaseList.number + 5}}</a>
+              </li>
+              <li class="page-item" [ngClass]="purchaseList.last ? 'disabled': ''">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.number + 1)">></a>
+              </li>
+              <li class="page-item" [ngClass]="purchaseList.last ? 'disabled': ''">
+                <a role="button" class="page-link"
+                   (click)="changePage(purchaseList.totalPages - 1)">
+                  Trang cuối
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <ng-template #elseBlockPagination></ng-template>
+  </div>
+</div>
+</body>

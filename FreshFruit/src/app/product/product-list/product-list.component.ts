@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import Swal from "sweetalert2";
 import {ShareService} from "../../service/authentication/share.service";
 import {TokenStorageService} from "../../service/authentication/token-storage.service";
+import {OrderService} from "../../service/order/order.service";
 
 @Component({
   selector: 'app-product-list',
@@ -25,11 +26,13 @@ export class ProductListComponent implements OnInit {
   id = 0;
   name = '';
   search = '';
+  idOrder = 0;
 
   constructor(private produceService: ProductService,
               private activatedRoute: ActivatedRoute,
               private shareService: ShareService,
               private tokenStorageService: TokenStorageService,
+              private orderService: OrderService,
               private title: Title) {
 
     this.title.setTitle("Sản phẩm theo danh mục");
@@ -121,6 +124,29 @@ export class ProductListComponent implements OnInit {
         timer: 1500
       })
     })
+  }
+
+  addToCart(idProduct: number, nameProduct: string, s: string, price: number){
+    if(this.tokenStorageService.isLogger()){
+      const qty = 1;
+      this.orderService.addOrderDetailByIdOrder(this.idOrder, idProduct, qty).subscribe(data =>{
+        this.shareService.sendClickEvent();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Đã thêm sản phẩm ' + nameProduct + ' vào giỏ hàng',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      })}else {
+      Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: 'Vui lòng đăng nhập để mua hàng!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
   }
 
   getItem(idProduct: number, nameProduct: string) {

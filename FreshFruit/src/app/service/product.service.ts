@@ -13,8 +13,7 @@ export class ProductService {
 
   URL_PRODUCT = 'http://localhost:8080/product';
 
-  constructor(private httpClient: HttpClient,
-              private tokenStorageService: TokenStorageService) {
+  constructor(private httpClient: HttpClient) {
   }
 
   getListNewProduct(size: number): Observable<any> {

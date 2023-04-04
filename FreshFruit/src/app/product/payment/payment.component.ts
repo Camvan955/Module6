@@ -45,10 +45,8 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     window.scroll(0, 0);
     this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
-      console.log(this.idAccount+ "nè")
       this.idOrder = next.idOrder;
       this.getPayment(this.idOrder);
-      console.log(this.idAccount+ "nè")
       this.getInfoCustomer(this.idAccount);
     })
     this.roles = this.tokenStorageService.getRole();
@@ -95,7 +93,6 @@ export class PaymentComponent implements OnInit {
 
   getInfoCustomer(idAccount: number) {
     this.securityService.getInfoCustomer(idAccount).subscribe(data => {
-      console.log(data, "infoo")
       if (data) {
         // @ts-ignore
         this.account = data;

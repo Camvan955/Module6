@@ -4,14 +4,13 @@ import {Observable} from "rxjs";
 import {Cart} from "../../entity/cart";
 import {Orders} from "../../entity/orders";
 import {TotalPay} from "../../dto/total-pay";
+import {PurchaseHistoryDto} from "../../dto/purchase-history-dto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
   URL_ORDER = "http://localhost:8080/order"
-  totalMoneyUSD: number | undefined;
-  exchangeRate: number = 23482.44687;
 
   constructor(private httpClient: HttpClient) {
   }
@@ -50,5 +49,9 @@ export class OrderService {
 
   updatePaymentStatus(idOrder: number){
     return this.httpClient.patch(this.URL_ORDER + '/payment',  {idOrder: idOrder, dateOrder: new Date().toLocaleString()});
+  }
+
+  getPurchaseHistory(idAccount: number , page:number):Observable<any> {
+    return this.httpClient.get(this.URL_ORDER+ '/purchase-history/'+ idAccount + '?page=' + page);
   }
 }
