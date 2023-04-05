@@ -4,6 +4,7 @@ import com.freshshop.dto.order.OrderDetailDto;
 import com.freshshop.dto.order.PaymentDto;
 import com.freshshop.dto.order.PurchaseHistoryView;
 import com.freshshop.dto.order.TotalPay;
+import com.freshshop.dto.product.ProductView;
 import com.freshshop.entity.order.OrderDetail;
 import com.freshshop.entity.order.Orders;
 import com.freshshop.repository.IOrderDetailRepository;
@@ -68,5 +69,11 @@ public class OrderDetailService implements IOrderDetailService {
     public Page<PurchaseHistoryView> pagePurchase(Long idAccount, Pageable pageable) {
         return orderDetailRepository.pagePurchase(idAccount, pageable);
     }
+
+    @Override
+    public Page<ProductView> getListProductBuyMore(Pageable pageable) {
+        return orderDetailRepository.getListProductBuyMore(pageable);
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.freshshop.controller;
 
 import com.freshshop.dto.order.*;
+import com.freshshop.dto.product.ProductView;
 import com.freshshop.entity.order.OrderDetail;
 import com.freshshop.entity.order.Orders;
 import com.freshshop.service.impl.OrderDetailService;
@@ -107,8 +108,18 @@ public class OrderRestController {
         Page<PurchaseHistoryView> purchasePage;
         purchasePage= orderDetailService.pagePurchase(idAccount, pageable);
         if (purchasePage.isEmpty()){
-            return new ResponseEntity<>(purchasePage, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(purchasePage, HttpStatus.OK);
+    }
+
+    @GetMapping("/product-buy-more")
+    public ResponseEntity<Page<ProductView>> getListProductBuyMore(@PageableDefault(size=5) Pageable pageable){
+        Page<ProductView> productViews;
+        productViews = orderDetailService.getListProductBuyMore(pageable);
+        if (productViews.getContent().isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(productViews, HttpStatus.OK);
     }
 }

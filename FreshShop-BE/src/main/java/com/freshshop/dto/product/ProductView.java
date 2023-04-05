@@ -5,4 +5,5 @@ Integer getIdProduct();
 String getNameProduct();
 Double getPrice();
 String getImage();
+Integer getTotalQuantity();
 }

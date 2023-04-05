@@ -69,16 +69,23 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
     @Query(value = "update `fresh_shopp`.`orders` set payment_status = true, date_order = :dateOrder where id_order=:idOrder", nativeQuery = true)
     void updatePaymentStatus(@Param("idOrder") Integer idOrder, @Param("dateOrder") String dateOrder);
 
-    @Query(value = "select p.name_product as nameProduct, " +
-            "od.quantity, " +
-            "`orders`.date_order as dateOrder, " +
-            "SUM(od.quantity* p.price) as total, " +
-            "price " +
-            "from `fresh_shopp`.`orders` " +
-            "join `fresh_shopp`.`product` p on orders.flag_delete = p.flag_delete " +
-            "join `fresh_shopp`.`order_detail` od on p.id_product = od.id_product " +
-            "where payment_status = true and id_account= :idAccount " +
-            "group by name_product, date_order " +
-            "order by date_order desc", nativeQuery = true)
+    @Query(value = "select p.name_product as nameProduct,\n" +
+            "       od.quantity,\n" +
+            "       o.date_order as dateOrder,\n" +
+            "       (od.quantity* p.price) as total, a.address\n" +
+            "from `fresh_shopp`.`product` p\n" +
+            "join `fresh_shopp`.`order_detail` od on p.id_product = od.id_product\n" +
+            "join `fresh_shopp`.`orders` o on od.id_order = o.id_order\n" +
+            "join `fresh_shopp`.`account` a on a.id_account = o.id_account\n" +
+            "where payment_status = true and a.id_account= :idAccount\n" +
+            "order by od.id_order desc", nativeQuery = true)
     Page<PurchaseHistoryView> pagePurchase(@Param("idAccount") Long idAccount,Pageable pageable);
+
+@Query(value = "select od.id_product as idProduct, image, name_product as nameProduct, price, sum(quantity) as totalQuantity\n" +
+        "from `fresh_shopp`.product\n" +
+        "join `fresh_shopp`.`order_detail` od on product.id_product = od.id_product\n" +
+        "join `fresh_shopp`.`orders` o on o.id_order = od.id_order\n" +
+        "group by `product`.id_product\n" +
+        "order by totalQuantity desc", nativeQuery = true)
+    Page<ProductView> getListProductBuyMore(Pageable pageable);
 }
