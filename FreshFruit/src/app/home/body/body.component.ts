@@ -16,11 +16,14 @@ import {OrderService} from "../../service/order/order.service";
 })
 export class BodyComponent implements OnInit {
   pageProduct: Product[] = [];
+  hotProduct: Product[] = [];
   page: any;
-  numberPage: number = 0;
+  numberPage = 0;
+  newPage = 0;
   product: Product = {idProduct: 0, price: 0, image: '', nameProduct: '', description: ''};
   totalPages = 0;
   size: number = 3;
+  sizeBuy = 5;
   last: any;
   first: any;
   role: String = "";
@@ -43,7 +46,7 @@ export class BodyComponent implements OnInit {
               private orderService: OrderService,
               private title: Title) {
     this.title.setTitle("Trang chủ");
-    if(this.tokenStorageService.getToken()){
+    if (this.tokenStorageService.getToken()) {
       this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
         this.idOrder = next.idOrder;
       })
@@ -63,15 +66,32 @@ export class BodyComponent implements OnInit {
 
   ngOnInit(): void {
     window.scroll(0, 0);
+    this.getProductBuyMore(this.sizeBuy);
     this.searchProductByName(this.size);
     this.role = this.getRole();
+  }
+
+  getProductBuyMore(newPage: number) {
+    this.orderService.getListProductBuyMore(this.newPage).subscribe(next => {
+      this.numberPage = next;
+      if (next) {
+        this.hotProduct = next.content;
+        console.log(this.hotProduct, "new")
+        this.newPage = next.number;
+        this.sizeBuy = next.sizeBuy;
+        this.totalPages = next.totalPages;
+        this.first = next.first;
+        this.last = next.last;
+      }
+    })
   }
 
   searchProductByName(size: number) {
     this.produceService.searchProductByName(this.search.trim(), size).subscribe(data => {
       this.page = data;
-      if(data){
+      if (data) {
         this.pageProduct = data.content;
+        console.log(this.pageProduct, "list")
         this.numberPage = data.number;
         this.size = data.size;
         this.totalPages = data.totalPages;
@@ -85,7 +105,7 @@ export class BodyComponent implements OnInit {
         title: 'Danh sách rỗng',
         showConfirmButton: true,
         timer: 1500,
-      }, )
+      },)
     })
   }
 
@@ -110,19 +130,20 @@ export class BodyComponent implements OnInit {
     })
   }
 
-  addToCart(idProduct: number, nameProduct: string){
-    if(this.tokenStorageService.isLogger()){
-    const qty = 1;
-    this.orderService.addOrderDetailByIdOrder(this.idOrder, idProduct, qty).subscribe(data =>{
-      this.shareService.sendClickEvent();
-      Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Đã thêm sản phẩm ' + nameProduct + ' vào giỏ hàng',
-              showConfirmButton: false,
-              timer: 1000
-            })
-    })}else {
+  addToCart(idProduct: number, nameProduct: string) {
+    if (this.tokenStorageService.isLogger()) {
+      const qty = 1;
+      this.orderService.addOrderDetailByIdOrder(this.idOrder, idProduct, qty).subscribe(data => {
+        this.shareService.sendClickEvent();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Đã thêm sản phẩm ' + nameProduct + ' vào giỏ hàng',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      })
+    } else {
       Swal.fire({
         position: 'center',
         icon: 'warning',

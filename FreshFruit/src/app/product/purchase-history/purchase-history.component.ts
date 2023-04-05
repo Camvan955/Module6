@@ -12,38 +12,33 @@ import {HistoryJson} from "../../dto/history-json";
 })
 export class PurchaseHistoryComponent implements OnInit {
 
-  purchaseHistory: PurchaseHistoryDto[] = [];
-  purchaseList!: HistoryJson;
-  request = {page: 0, size: 5};
-  pageNumber = 0;
-  totalPages = 0;
-  idAccount: string = '';
+  idAccount = 0;
+  page = 0;
+  purchaseHistoryList: PurchaseHistoryDto[] = [];
+  purchaseHistoryJson!: HistoryJson;
 
   constructor(private title: Title,
-              private orderService: OrderService,
-              private tokenStorageService: TokenStorageService) {
+              private tokenStorageService: TokenStorageService,
+              private orderService: OrderService) {
     this.title.setTitle("Lịch sử mua hàng")
   }
 
   ngOnInit(): void {
     window.scroll(0, 0);
-    this.getPurchaseHistory(0);
+    this.getPurcharseHistory();
   }
 
-  getPurchaseHistory(page: number): void {
-    this.idAccount = this.tokenStorageService.getIdAccount();
-    this.orderService.getPurchaseHistory(parseInt(this.idAccount),page).subscribe(data => {
-        this.purchaseList = data;
-        this.purchaseHistory = data.content;
-      this.totalPages = data.totalPages;
-        this.pageNumber = data.pageable.pageNumber;
-      }
-    )
+  getPurcharseHistory(): void {
+    this.idAccount = parseInt(this.tokenStorageService.getIdAccount());
+    this.orderService.getPurchaseHistory(this.idAccount, this.page).subscribe(data => {
+      this.purchaseHistoryList = data.content;
+      console.log(this.purchaseHistoryList);
+      this.purchaseHistoryJson = data;
+    })
   }
 
-  changePage(pageNumber: number): void {
-    this.request.page = pageNumber;
+  gotoPage(pageNumber: number): void {
+    this.page = pageNumber;
     this.ngOnInit();
   }
-
 }

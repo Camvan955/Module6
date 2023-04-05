@@ -61,7 +61,7 @@
                     <div class="text-center m-5">
                       <img src="../../../assets/images/gio hang trong.png" height="210" width="300"/>
                     </div>
-                    <button class="btn btn-success" style="margin-left: 42%; margin-top: 3%" routerLink="/home">Quay lại</button>
+                    <button class="btn btn-outline-secondary" style="margin-left: 38%; margin-top: 3%" routerLink="/home">Tìm kiếm sản phẩm</button>
                   </ng-template>
                 </div>
                 <div class="col-lg-4 bg-grey">
@@ -94,7 +94,7 @@
                     </div>
 
                     <a type="button" class="btn btn-primary btn-md mt-3" style="margin-left: 30%"
-                       data-mdb-ripple-color="primary" routerLink="/product/payment"> Mua hàng ({{quantity}})
+                       data-mdb-ripple-color="primary" routerLink="/product/payment" *ngIf="quantity>0"> Mua hàng ({{quantity}})
                     </a>
                   </div>
                 </div>

@@ -54,4 +54,8 @@ export class OrderService {
   getPurchaseHistory(idAccount: number , page:number):Observable<any> {
     return this.httpClient.get(this.URL_ORDER+ '/purchase-history/'+ idAccount + '?page=' + page);
   }
+
+  getListProductBuyMore(page: number): Observable<any>{
+    return this.httpClient.get(this.URL_ORDER+ '/product-buy-more/?page=' + page);
+  }
 }
