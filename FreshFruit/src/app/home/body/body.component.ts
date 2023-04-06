@@ -76,7 +76,6 @@ export class BodyComponent implements OnInit {
       this.numberPage = next;
       if (next) {
         this.hotProduct = next.content;
-        console.log(this.hotProduct, "new")
         this.newPage = next.number;
         this.sizeBuy = next.sizeBuy;
         this.totalPages = next.totalPages;
@@ -91,7 +90,6 @@ export class BodyComponent implements OnInit {
       this.page = data;
       if (data) {
         this.pageProduct = data.content;
-        console.log(this.pageProduct, "list")
         this.numberPage = data.number;
         this.size = data.size;
         this.totalPages = data.totalPages;

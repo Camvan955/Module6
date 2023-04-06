@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Title} from "@angular/platform-browser";
+import {SecurityService} from "../../service/authentication/security.service";
+import {Account} from "../../entity/account";
+import {Token} from "@angular/compiler";
+import {TokenStorageService} from "../../service/authentication/token-storage.service";
 
 @Component({
   selector: 'app-detail',
@@ -7,9 +12,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
+  customer: Account = {idAccount: 0, name: '', password: '', email: '', phoneNumber: '', address: '', avatar: ''};
 
-  ngOnInit(): void {
+
+  constructor(private title: Title,
+              private securityService: SecurityService,
+              private tokenStorageService: TokenStorageService) {
+    this.title.setTitle('Thông tin khách hàng');
+    this.securityService.getInfoCustomer(parseInt(this.tokenStorageService.getIdAccount())).subscribe(data => {
+      this.customer = data;
+    });
   }
 
+  ngOnInit(): void {
+    window.scroll(0, 0);
+  }
 }

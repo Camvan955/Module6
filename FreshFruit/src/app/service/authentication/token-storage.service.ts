@@ -167,23 +167,5 @@ export class TokenStorageService {
   getCart() {
     return JSON.parse(<string>sessionStorage.getItem(CART));
   }
-
-  checkExistId(idProduct: number) {
-    for (let i = 0; i < this.getCart().length; i++) {
-      if (this.getCart()[i].id == idProduct) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  upQuantityProduct(ids: number, cartList: Cart[]) {
-    for (let i = 0; i < cartList.length; i++) {
-      if (cartList[i].idProduct == ids) {
-        cartList[i].quantity += 1;
-        break;
-      }
-    }
-  }
 }
 

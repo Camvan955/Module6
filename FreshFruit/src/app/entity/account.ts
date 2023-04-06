@@ -5,4 +5,5 @@ export interface Account {
   email: String;
   phoneNumber: String;
   address: String;
+  avatar: String;
 }

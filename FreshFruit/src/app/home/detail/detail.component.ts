@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../entity/product";
-import {Cart} from "../../entity/cart";
 import {ProductService} from "../../service/product.service";
 import {ActivatedRoute} from "@angular/router";
 import {TokenStorageService} from "../../service/authentication/token-storage.service";
@@ -15,9 +14,7 @@ import {OrderService} from "../../service/order/order.service";
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-  productt: Product = {idProduct: 0, price: 0, nameProduct: '', image: '', description: ''};
-  cartt: Cart = {idProduct: 0, price: 0, quantity: 0};
-  cartList: Cart[] = [];
+  product: Product = {idProduct: 0, price: 0, nameProduct: '', image: '', description: ''};
   idOrder = 0;
 
   constructor(private productService: ProductService,
@@ -34,7 +31,7 @@ export class DetailComponent implements OnInit {
       const id = parseInt(<string> next.get('id'));
       console.log(id);
       this.productService.getProductById(id).subscribe(next => {
-        this.productt = next;
+        this.product = next;
       });
     });
   }

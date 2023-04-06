@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {ShareService} from "../../service/authentication/share.service";
 import Swal from "sweetalert2";
 import {OrderService} from "../../service/order/order.service";
+import {Account} from "../../entity/account";
 
 @Component({
   selector: 'app-header',
@@ -16,10 +17,10 @@ export class HeaderComponent implements OnInit {
   user: any;
   username = ''
   name = '';
-  role: string = "";
+  role: string = '';
   quantity = 0;
   idOrder = 0;
-
+  customer : Account[] = [];
   constructor(private tokenStorageService: TokenStorageService,
               private securityService: SecurityService,
               private router: Router,
@@ -36,7 +37,6 @@ export class HeaderComponent implements OnInit {
     });
     this.shareService.getClickEvent().subscribe(next => {
       this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
-        // this.getTotalPay(this.idOrder);
         this.idOrder = next.idOrder;
         this.quantity = this.getTotalPay(this.idOrder);
       })

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Customer} from "../../dto/customer";
 import {Account} from "../../entity/account";
+import {Cart} from "../../entity/cart";
 
 const AUTH_API = 'http://localhost:8080/api/auth/';
 
@@ -26,9 +26,7 @@ export class SecurityService {
     };
   }
 
-  /**
-   * funtion: login
-   */
+
   login(obj: any): Observable<any> {
     return this.http.post(AUTH_API + 'sign-in', {
       username: obj.username,
@@ -36,37 +34,16 @@ export class SecurityService {
     }, this.httpOptions);
   }
 
-  /**
-   * funtion: sign-up
-   */
-  register(obj: any): Observable<any> {
-    console.log(obj);
-    return this.http.post(AUTH_API + 'sign-up', {
-      name: obj.name,
-      username: obj.username,
-      email: obj.email,
-      password: obj.password,
-    }, this.httpOptions);
-  }
 
-  /**
-   * funtion: setIsLoggedIn
-   */
   setIsLoggedIn(user: any, isLoggedIn: boolean) {
     this.isLoggedInObservable.next(isLoggedIn);
     this.isUserObservable.next(user);
   }
 
-  /**
-   * funtion: getUserLoggedIn
-   */
   getUserLoggedIn(): Observable<any> {
     return this.isUserObservable.asObservable();
   }
 
-  /**
-   * funtion: getIsLoggedIn
-   */
   getIsLoggedIn(): Observable<boolean> {
     return this.isLoggedInObservable.asObservable();
   }
