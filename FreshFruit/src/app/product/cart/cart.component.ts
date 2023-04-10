@@ -26,6 +26,9 @@ export class CartComponent implements OnInit {
   address: String = "";
   phoneNumber: String = "";
   email: String = "";
+  id = 0;
+  name = '';
+
   constructor(private tokenStorageService: TokenStorageService,
               private router: Router,
               private title: Title,
@@ -114,9 +117,13 @@ export class CartComponent implements OnInit {
     })
   }
 
-
   clear() {
     this.cart = [];
     this.total = 0;
+  }
+
+  getItem(idProduct: number, nameProduct: string) {
+    this.id = idProduct;
+    this.name = nameProduct;
   }
 }

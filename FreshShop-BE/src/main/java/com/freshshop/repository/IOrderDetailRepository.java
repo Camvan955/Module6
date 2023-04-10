@@ -79,13 +79,13 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
             "join `fresh_shopp`.`account` a on a.id_account = o.id_account\n" +
             "where payment_status = true and a.id_account= :idAccount\n" +
             "order by od.id_order desc", nativeQuery = true)
-    Page<PurchaseHistoryView> pagePurchase(@Param("idAccount") Long idAccount,Pageable pageable);
+    Page<PurchaseHistoryView> pagePurchase(@Param("idAccount") Long idAccount, Pageable pageable);
 
-@Query(value = "select od.id_product as idProduct, image, name_product as nameProduct, price, sum(quantity) as totalQuantity\n" +
-        "from `fresh_shopp`.product\n" +
-        "join `fresh_shopp`.`order_detail` od on product.id_product = od.id_product\n" +
-        "join `fresh_shopp`.`orders` o on o.id_order = od.id_order\n" +
-        "group by `product`.id_product\n" +
-        "order by totalQuantity desc", nativeQuery = true)
+    @Query(value = "select od.id_product as idProduct, image, name_product as nameProduct, price, sum(quantity) as totalQuantity\n" +
+            "from `fresh_shopp`.product\n" +
+            "join `fresh_shopp`.`order_detail` od on product.id_product = od.id_product\n" +
+            "join `fresh_shopp`.`orders` o on o.id_order = od.id_order\n" +
+            "group by `product`.id_product\n" +
+            "order by totalQuantity desc", nativeQuery = true)
     Page<ProductView> getListProductBuyMore(Pageable pageable);
 }

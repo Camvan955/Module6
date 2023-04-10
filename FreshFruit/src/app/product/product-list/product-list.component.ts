@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
   numberPage: number = 0;
   product: Product = {idProduct: 0, price: 0, image: '', nameProduct: '', description: ''};
   totalPages = 0;
-  size: number = 3;
+  size: number = 6;
   last: any;
   first: any;
   role: String = "";

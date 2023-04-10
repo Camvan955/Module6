@@ -45,7 +45,7 @@ export class BodyComponent implements OnInit {
               private tokenStorageService: TokenStorageService,
               private orderService: OrderService,
               private title: Title) {
-    this.title.setTitle("Trang chủ");
+    this.title.setTitle("Nông sản sạch");
     if (this.tokenStorageService.getToken()) {
       this.orderService.getOrderByIdAccount(parseInt(this.tokenStorageService.getIdAccount())).subscribe(next => {
         this.idOrder = next.idOrder;
